@@ -69,6 +69,7 @@ class ComposerStaticInitbbe64585099b1e0582bade7497d44366
         array (
             'League\\Flysystem\\' => 17,
             'Laravel\\Tinker\\' => 15,
+            'Laravel\\Homestead\\' => 18,
         ),
         'I' => 
         array (
@@ -197,6 +198,10 @@ class ComposerStaticInitbbe64585099b1e0582bade7497d44366
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
+        ),
+        'Laravel\\Homestead\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/homestead/src',
         ),
         'Illuminate\\' => 
         array (
@@ -1545,6 +1550,11 @@ class ComposerStaticInitbbe64585099b1e0582bade7497d44366
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'Laravel\\Homestead\\MakeCommand' => __DIR__ . '/..' . '/laravel/homestead/src/MakeCommand.php',
+        'Laravel\\Homestead\\Settings\\HomesteadSettings' => __DIR__ . '/..' . '/laravel/homestead/src/Settings/HomesteadSettings.php',
+        'Laravel\\Homestead\\Settings\\JsonSettings' => __DIR__ . '/..' . '/laravel/homestead/src/Settings/JsonSettings.php',
+        'Laravel\\Homestead\\Settings\\YamlSettings' => __DIR__ . '/..' . '/laravel/homestead/src/Settings/YamlSettings.php',
+        'Laravel\\Homestead\\Traits\\GeneratesSlugs' => __DIR__ . '/..' . '/laravel/homestead/src/Traits/GeneratesSlugs.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
