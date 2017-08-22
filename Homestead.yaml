@@ -1,0 +1,36 @@
+---
+ip: "127.0.0.1"
+memory: 512
+cpus: 1
+hostname: anuncios.local.manuirrazabal.com
+name: anuncios
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: "~/Sites/A_0f109f341095deb67a5ec13f4c18dd1d"
+      to: "/home/vagrant/anuncios"
+
+sites:
+    - map: anuncios.local.manuirrazabal.com
+      to: "/home/vagrant/anuncios/public"
+
+databases:
+    - anuncios
+
+# blackfire:
+#     - id: foo
+#       token: bar
+#       client-id: foo
+#       client-token: bar
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
