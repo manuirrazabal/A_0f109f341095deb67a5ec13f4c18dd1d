@@ -61,6 +61,42 @@ class InitialMigration extends Migration
                 $table->softDeletes();
             }
         );
+
+        // ** GENERAL CONFIGURATION
+
+        // Table Scheme: Country
+        Schema::create(
+            'an_country',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('country_code', 128);
+                $table->string('country_name', 255);
+                $table->boolean('country_active')->default(1);
+                $table->timestamps();
+            }
+        );
+
+        // Table Scheme: State
+        Schema::create(
+            'an_state',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('state_name', 255);
+                $table->integer('country_id');
+                $table->timestamps();
+            }
+        );
+
+        // Table Scheme: Cities
+        Schema::create(
+            'an_cities',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('city_name', 255);
+                $table->integer('state_id');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -74,5 +110,8 @@ class InitialMigration extends Migration
         Schema::drop('an_users');
         Schema::drop('an_business');
         Schema::drop('an_business_images');
+        Schema::drop('an_country');
+        Schema::drop('an_state');
+        Schema::drop('an_cities');
     }
 }
