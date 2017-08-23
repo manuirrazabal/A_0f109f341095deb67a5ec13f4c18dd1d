@@ -1,5 +1,5 @@
 ---
-ip: "127.0.0.1"
+ip: "127.0.0.255"
 memory: 512
 cpus: 1
 hostname: anuncios.local.manuirrazabal.com
