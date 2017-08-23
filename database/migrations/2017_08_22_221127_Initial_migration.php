@@ -24,6 +24,7 @@ class InitialMigration extends Migration
                 $table->string('user_password');
                 $table->string('user_phone');
                 $table->boolean('user_active')->default(1);
+                $table->rememberToken();
                 $table->timestamps();
                 $table->softDeletes();
             }
@@ -110,11 +111,11 @@ class InitialMigration extends Migration
     public function down()
     {
         //
-        Schema::drop('an_users');
-        Schema::drop('an_business');
-        Schema::drop('an_business_images');
-        Schema::drop('an_country');
-        Schema::drop('an_states');
-        Schema::drop('an_cities');
+        Schema::dropIfExists('an_users');
+        Schema::dropIfExists('an_business');
+        Schema::dropIfExists('an_business_images');
+        Schema::dropIfExists('an_country');
+        Schema::dropIfExists('an_states');
+        Schema::dropIfExists('an_cities');
     }
 }

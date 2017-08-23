@@ -65,7 +65,7 @@ class CountriesSeeder extends Seeder
 		[ 'CD',  'Democratic Republic Of The Congo', '0'],
 		[ 'CK',  'Cook Islands', '0'],
 		[ 'CR',  'Costa Rica', '0'],
-		[ 'CI',  'Cote D''Ivoire Ivory Coast', '0'],
+		[ 'CI',  'Cote DIvoire Ivory Coast', '0'],
 		[ 'HR',  'Croatia Hrvatska', '0'],
 		[ 'CU',  'Cuba', '0'],
 		[ 'CY',  'Cyprus', '0'],
@@ -675,7 +675,7 @@ class CountriesSeeder extends Seeder
                 [
                     'city_name'    	=> $cities[0],
                     'city_code'   	=> $cities[1],
-                    'city_state_id'	=> $cities[3],
+                    'city_state_id'	=> $cities[2],
                  ]
             );
         }
