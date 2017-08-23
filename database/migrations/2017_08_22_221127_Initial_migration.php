@@ -35,6 +35,7 @@ class InitialMigration extends Migration
             'an_business',
             function (Blueprint $table) {
                 $table->increments('business_id');
+                $table->integer('business_user_id');
                 $table->string('business_name', 128);
                 $table->string('business_address');
                 $table->integer('business_city');
