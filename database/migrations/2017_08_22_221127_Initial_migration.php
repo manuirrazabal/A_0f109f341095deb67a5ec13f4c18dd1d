@@ -24,6 +24,7 @@ class InitialMigration extends Migration
                 $table->string('user_password');
                 $table->string('user_phone');
                 $table->boolean('user_active')->default(1);
+                $table->integer('user_type_id');
                 $table->rememberToken();
                 $table->timestamps();
                 $table->softDeletes();
@@ -102,6 +103,31 @@ class InitialMigration extends Migration
                 $table->timestamps();
             }
         );
+
+        // Table Scheme: Categories
+        Schema::create(
+            'an_categories',
+            function (Blueprint $table) {
+                $table->increments('cat_id');
+                $table->string('cat_description');
+                $table->integer('cat_order');
+                $table->boolean('cat_active')->default(1);
+                $table->timestamps();
+            }
+        );
+
+        // Table Scheme: Categories
+        Schema::create(
+            'an_subcategories',
+            function (Blueprint $table) {
+                $table->increments('scat_id');
+                $table->integer('scat_cat_id');
+                $table->string('scat_description');
+                $table->integer('scat_order');
+                $table->boolean('scat_active')->default(1);
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -118,5 +144,7 @@ class InitialMigration extends Migration
         Schema::dropIfExists('an_country');
         Schema::dropIfExists('an_states');
         Schema::dropIfExists('an_cities');
+        Schema::dropIfExists('an_categories');
+        Schema::dropIfExists('an_subcategories');
     }
 }

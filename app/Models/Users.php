@@ -45,6 +45,7 @@ class Users extends Model
         'user_password',
         'user_phone',
         'user_active',
+        'user_type_id',
         'remember_token',
     ];
 
@@ -67,4 +68,10 @@ class Users extends Model
     {
         return $this->hasMany('App\Models\Business', 'business_user_id', 'user_id');
     }
+
+    /*
+    |------------------------------------------------
+    | Model general methods
+    |------------------------------------------------
+    */
 }

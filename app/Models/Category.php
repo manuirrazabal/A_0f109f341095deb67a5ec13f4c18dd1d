@@ -3,35 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BusinessImages extends Model
+class Category extends Model
 {
-    /**
-     * Included model traits
-     */
-    use SoftDeletes;
-
     /**
      * Table name
      *
      * @var string
      */
-    protected $table        = "an_business_images";
+    protected $table        = "an_categories";
 
     /**
      * Table primary Kkey
      *
      * @var string
      */
-    protected $primaryKey   = "bimages_id";
+    protected $primaryKey   = "cat_id";
 
     /**
      * Protected attributes.
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['created_at', 'updated_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -39,8 +33,9 @@ class BusinessImages extends Model
      * @var array
      */
     protected $fillable = [
-        'bimages_business_id',
-        'bimages_route',
+        'cat_description',
+        'cat_order',
+        'cat_active',
     ];
 
     /*
@@ -49,9 +44,9 @@ class BusinessImages extends Model
     |------------------------------------------------
     */
 
-    public function business()
+    public function subcategories()
     {
-        return $this->belongsTo('App\Models\BusinessImages', 'bimages_business_id', 'business_id');
+        return $this->hasMany('App\Models\Subcategory', 'scat_cat_id', 'cat_id');
     }
 
     /*

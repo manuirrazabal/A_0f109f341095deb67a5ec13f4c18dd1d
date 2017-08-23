@@ -48,4 +48,10 @@ class Country extends Model
     {
         return $this->hasMany('App\Models\States', 'state_country_id', 'id');
     }
+
+    /*
+    |------------------------------------------------
+    | Model general methods
+    |------------------------------------------------
+    */
 }

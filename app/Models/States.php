@@ -54,4 +54,10 @@ class States extends Model
     {
         return $this->hasMany('App\Models\Cities', 'city_state_id', 'id');
     }
+
+    /*
+    |------------------------------------------------
+    | Model general methods
+    |------------------------------------------------
+    */
 }

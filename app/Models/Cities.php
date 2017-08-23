@@ -48,4 +48,10 @@ class Cities extends Model
     {
         return $this->belongsTo('App\Models\States', 'city_state_id', 'id');
     }
+
+    /*
+    |------------------------------------------------
+    | Model general methods
+    |------------------------------------------------
+    */
 }

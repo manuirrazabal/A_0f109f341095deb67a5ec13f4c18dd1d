@@ -69,4 +69,33 @@ class Business extends Model
     {
         return $this->belongsTo('App\Models\Users', 'business_user_id', 'user_id');
     }
+
+    /*
+    |------------------------------------------------
+    | Model general methods
+    |------------------------------------------------
+    */
+
+    /**
+     * Get all business from specific user..
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getBusiness($id)
+    {
+        return $this->where('business_user_id', $id)->get();
+    }
+
+    /**
+     * Get all business from specific user..
+     *
+     * @param integer id user
+     * @param integer idBusiness 
+     * @return object
+     */
+    public function getBusinessById($id, $idBusiness)
+    {
+        return $this->where('business_user_id', $id)->findOrFail($idBusiness);
+    }
 }
