@@ -18,11 +18,11 @@ class InitialMigration extends Migration
             'an_users',
             function (Blueprint $table) {
                 $table->increments('user_id');
-                $table->string('user_name', 128)->nullable();
-                $table->string('user_lastname', 128)->nullable();
-                $table->string('user_email', 128);
-                $table->string('user_password', 128);
-                $table->string('user_phone', 128);
+                $table->string('user_name', 128);
+                $table->string('user_lastname', 128);
+                $table->string('user_email')->unique();
+                $table->string('user_password');
+                $table->string('user_phone');
                 $table->boolean('user_active')->default(1);
                 $table->timestamps();
                 $table->softDeletes();
@@ -35,15 +35,15 @@ class InitialMigration extends Migration
             function (Blueprint $table) {
                 $table->increments('business_id');
                 $table->string('business_name', 128);
-                $table->string('business_address', 255);
+                $table->string('business_address');
                 $table->integer('business_city');
-                $table->string('business_phone', 128);
-                $table->string('business_mail', 128);
-                $table->string('business_postalcode', 128);
+                $table->string('business_phone');
+                $table->string('business_mail');
+                $table->string('business_postalcode');
                 $table->integer('business_cat_id');
-                $table->text('bdetail_schedulle', 128);
-                $table->text('bdetail_detail', 255);
-                $table->text('bdetail_more_info', 255);
+                $table->text('bdetail_schedulle');
+                $table->text('bdetail_detail');
+                $table->text('bdetail_more_info');
                 $table->boolean('business_active')->default(1);
                 $table->timestamps();
                 $table->softDeletes();
@@ -56,7 +56,7 @@ class InitialMigration extends Migration
             function (Blueprint $table) {
                 $table->increments('bimages_id');
                 $table->integer('bimages_business_id');
-                $table->string('bimages_detail', 255);
+                $table->string('bimages_route', 255);
                 $table->timestamps();
                 $table->softDeletes();
             }
@@ -69,8 +69,8 @@ class InitialMigration extends Migration
             'an_country',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('country_code', 128);
-                $table->string('country_name', 255);
+                $table->string('country_code')->unique();
+                $table->string('country_name')->unique();
                 $table->boolean('country_active')->default(1);
                 $table->timestamps();
             }
@@ -78,11 +78,13 @@ class InitialMigration extends Migration
 
         // Table Scheme: State
         Schema::create(
-            'an_state',
+            'an_states',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('state_name', 255);
-                $table->integer('country_id');
+                $table->integer('state_number');
+                $table->integer('state_country_id');
+                $table->boolean('state_active')->default(1);
                 $table->timestamps();
             }
         );
@@ -93,7 +95,8 @@ class InitialMigration extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('city_name', 255);
-                $table->integer('state_id');
+                $table->string('city_code', 15);
+                $table->integer('city_state_id');
                 $table->timestamps();
             }
         );
@@ -111,7 +114,7 @@ class InitialMigration extends Migration
         Schema::drop('an_business');
         Schema::drop('an_business_images');
         Schema::drop('an_country');
-        Schema::drop('an_state');
+        Schema::drop('an_states');
         Schema::drop('an_cities');
     }
 }
