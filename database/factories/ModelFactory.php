@@ -35,7 +35,7 @@ $factory->define(
     }
 );
 
-// Request Factory For Contries
+// Request Factory For States
 $factory->define(
     App\Models\States::class,
     function (Faker\Generator $faker) {
@@ -48,7 +48,7 @@ $factory->define(
     }
 );
 
-// Request Factory For Contries
+// Request Factory For Cities
 $factory->define(
     App\Models\Cities::class,
     function (Faker\Generator $faker) {
@@ -56,6 +56,31 @@ $factory->define(
         'city_name'     => isset($state_name) ?: $state_name = $faker->city,
         'city_code'    	=> isset($state_number) ?: $state_number = $faker->randomDigitNotNull,
         'city_state_id'	=> isset($state_country_id) ?: $state_country_id = $faker->randomDigitNotNull,
+        ];
+    }
+);
+
+// Request Factory For Categories
+$factory->define(
+    App\Models\Category::class,
+    function (Faker\Generator $faker) {
+        return [
+        'cat_description'   => isset($cat_description) ?: $cat_description = $faker->sentence,
+        'cat_order'         => isset($cat_order) ?: $cat_order = $faker->randomDigitNotNull,
+        'cat_active'        => isset($cat_active) ?: $cat_active = 1,
+        ];
+    }
+);
+
+// Request Factory For Categories
+$factory->define(
+    App\Models\Subcategory::class,
+    function (Faker\Generator $faker) {
+        return [
+        'scat_cat_id'           => isset($scat_cat_id) ?: $scat_cat_id = $faker->randomDigitNotNull,
+        'scat_description'      => isset($scat_description) ?: $scat_description = $faker->sentence,
+        'scat_order'            => isset($scat_order) ?: $scat_order = $faker->randomDigitNotNull,
+        'scat_active'           => isset($scat_active) ?: $scat_active = 1,
         ];
     }
 );
