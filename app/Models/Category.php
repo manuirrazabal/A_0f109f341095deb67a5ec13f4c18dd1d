@@ -54,4 +54,9 @@ class Category extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+    public function getCategoriesAll()
+    {
+        return $this->where('cat_active', 1)->with('subcategories')->get();
+    }
 }
