@@ -8,9 +8,9 @@
     <div class="hero-image-inner" style="background-image: url('/img/tmp/slider-large-3.jpg');">
         <div class="hero-image-content">
             <div class="container">
-                <h1>Directory Template</h1>
+                <h1>Como una guia telef&oacute;nica</h1>
 
-                <p>Create your own directory website by using Superlist template <br> incorporating all features of modern directory website.</p>   
+                <p>Pero a nuestra manera. M&aacute;s f&aacute;cil y r&aacute;pida de usar.</p>   
 
                 <a href="listing-row.html" class="btn btn-primary btn-lg">View Listings</a>
                 <a href="listing-submit.html" class="btn btn-secondary btn-lg">Submit</a>
@@ -67,7 +67,8 @@
 </div>
 
 <div class="container">
-    <div class="block background-white fullwidth pt0 pb0">
+    {{-- 
+<div class="block background-white fullwidth pt0 pb0">
         <div class="partners">
     <a href="#">
         <img src="{{ url('/img/tmp/partner-1.jpg') }}" alt="">
@@ -90,20 +91,16 @@
     </a>
 </div><!-- /.partners -->
 
-    </div>
+    </div>--}}
 
     <div class="page-header">
-    <h1>Most Recent Places &amp; Events</h1>
-    <p>List of most recent interesting places and events in our directory submitted <br>by our users. Check whats going on in the city now.</p>
-</div><!-- /.page-header -->
+        <h1>Los anuncios mas recientes </h1>
+        {{-- <p>List of most recent interesting places and events in our directory submitted <br>by our users. Check whats going on in the city now.</p> --}}
+    </div><!-- /.page-header -->
 
 <div class="cards-simple-wrapper">
     <div class="row">
         
-
-        
-            
-
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ url('/img/tmp/product-2.jpg') }}">
                     <div class="card-simple-background">
@@ -336,6 +333,8 @@
         
     </div><!-- /.row -->
 </div><!-- /.cards-simple-wrapper -->
+
+@include('includes.categories')
 
 
     <div class="block background-white fullwidth mt80">
@@ -836,143 +835,23 @@
 </div><!-- /.pricings -->
 
 
-    <div class="block background-white fullwidth mt80 mb-80">
-        <div class="categories">
-    <ul>
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-bed"></i> Stay</a>
-            <ul>
-                <li><a href="#">Homestay</a>,</li>
-                <li><a href="#">Hotel</a>,</li>
-                <li><a href="#">Camping</a>,</li>
-                <li><a href="#">Guesthouse,</a></li>
-                <li><a href="#">Hostel</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-car"></i> Automotive</a>
-            <ul>
-                <li><a href="#">Mechanics</a>,</li>
-                <li><a href="#">Gas Stations</a>,</li>
-                <li><a href="#">Parts</a>,</li>
-                <li><a href="#">Repair</a>,</li>
-                <li><a href="#">Tires</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-suitcase"></i> Jobs</a>
-            <ul>
-                <li><a href="#">Cook</a>,</li>
-                <li><a href="#">Hairdrasser</a>,</li>
-                <li><a href="#">Management</a>,</li>
-                <li><a href="#">Waiter</a>,</li>
-                <li><a href="#">Worker</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-heart"></i> Medicine</a>
-            <ul>
-                <li><a href="#">Dental</a>,</li>
-                <li><a href="#">Dermatology</a>,</li>
-                <li><a href="#">Neurology</a>,</li>
-                <li><a href="#">Pediatrics</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-glass"></i> Nightlife</a>
-            <ul>
-                <li><a href="#">Bars &amp; Pubs</a>,</li>
-                <li><a href="#">Concert</a>,</li>
-                <li><a href="#">Cinemas</a>,</li>
-                <li><a href="#">Disco</a>,</li>
-                <li><a href="#">Theater</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-home"></i> Real Estate</a>
-            <ul>
-                <li><a href="#">Apartmant</a>,</li>
-                <li><a href="#">Building Area</a>,</li>
-                <li><a href="#">Condo</a>,</li>
-                <li><a href="#">House</a>,</li>
-                <li><a href="#">Villa</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-cutlery"></i> Restaurant</a>
-            <ul>
-                <li><a href="#">Bistro</a>,</li>
-                <li><a href="#">Brunch</a>,</li>
-                <li><a href="#">Caffee</a>,</li>
-                <li><a href="#">Dinning</a>,</li>
-                <li><a href="#">Fast Food</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-futbol-o"></i> Sports</a>
-            <ul>
-                <li><a href="#">Bistro</a>,</li>
-                <li><a href="#">Brunch</a>,</li>
-                <li><a href="#">Caffee</a>,</li>
-                <li><a href="#">Dinning</a>,</li>
-                <li><a href="#">Fast Food</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#" class="categories-action">Submit</a>
-            <a href="#" class="categories-link"><i class="fa fa-map-marker"></i> Travel</a>
-            <ul>
-                <li><a href="#">Cruises</a>,</li>
-                <li><a href="#">Destinations</a>,</li>
-                <li><a href="#">Holidays</a>,</li>
-                <li><a href="#">Transportations</a></li>
-                <li class="all"><a href="#">View All <i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </li>
-    </ul>
-</div><!-- /.categories -->
-
-    </div>
-
     <div class="block background-secondary fullwidth mt80 mb-80 pt60 pb60">
         <div class="row">
     <div class="col-sm-12">
         <div class="contact-info-wrapper">
-            <h2>Do You Have Any Questions?</h2>
+            <h2>Tienes alguna consulta?</h2>
 
             <div class="contact-info">
                 <span class="contact-info-item">
                     <i class="fa fa-at"></i>
-                    <span>support@sitename.com</span>
+                    <span>support@manuirrazabal.com</span>
                 </span><!-- /.contact-info-item -->
-
+                {{--
                 <span class="contact-info-item">
                     <i class="fa fa-phone"></i>
                     <span>+123-456-789</span>
                 </span><!-- /.contact-info-item -->
+                --}}
             </div><!-- /.contact-info-->
         </div><!-- /.contact-info-wrapper -->
     </div><!-- /.col-* -->
