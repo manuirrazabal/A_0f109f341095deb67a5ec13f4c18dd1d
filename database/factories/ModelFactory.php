@@ -12,16 +12,30 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Users::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'user_name'     => isset($user_name) ?: $user_name = $faker->name,
+        'user_lastname' => isset($user_lastname) ?: $user_lastname = $faker->lastName,
+        'user_email'    => isset($user_email) ?: $user_email = $faker->unique()->safeEmail,
+        'user_password' => isset($user_password) ?: $user_password =  bcrypt('secret'),
+        'user_phone'    => isset($user_phone) ?: $user_phone = $faker->phoneNumber,
+        'user_active'   => isset($user_active) ?: $user_active = 1,
+        'user_type_id'  => isset($user_type_id) ?: $user_type_id = 1,
         'remember_token' => str_random(10),
     ];
 });
+
+// Request Factory For Contries
+$factory->define(
+    App\Models\UserTypes::class,
+    function (Faker\Generator $faker) {
+        return [
+        'user_type_description'            => isset($user_type_description) ?: $user_type_description = $faker->word,
+        ];
+    }
+);
 
 // Request Factory For Contries
 $factory->define(
@@ -84,3 +98,8 @@ $factory->define(
         ];
     }
 );
+
+// Request Factory Business
+
+
+// Request Factory BusinessImages

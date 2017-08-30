@@ -17,7 +17,7 @@ class InitialMigration extends Migration
         Schema::create(
             'an_users',
             function (Blueprint $table) {
-                $table->increments('user_id');
+                $table->uuid('user_id');
                 $table->string('user_name', 128);
                 $table->string('user_lastname', 128);
                 $table->string('user_email')->unique();
@@ -31,12 +31,22 @@ class InitialMigration extends Migration
             }
         );
 
+        // Table Scheme: Users Types
+        Schema::create(
+            'an_users_type',
+            function (Blueprint $table) {
+                $table->increments('user_type_id');
+                $table->string('user_type_description', 128);
+                $table->timestamps();
+            }
+        );
+
         // Table Scheme: Business
         Schema::create(
             'an_business',
             function (Blueprint $table) {
                 $table->increments('business_id');
-                $table->integer('business_user_id');
+                $table->uuid('business_user_id');
                 $table->string('business_name', 128);
                 $table->string('business_address');
                 $table->integer('business_city');

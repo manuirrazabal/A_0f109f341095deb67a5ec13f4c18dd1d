@@ -69,6 +69,11 @@ class Users extends Model
         return $this->hasMany('App\Models\Business', 'business_user_id', 'user_id');
     }
 
+    public function usertypes()
+    {
+        return $this->belongsTo('App\Models\UserTypes', 'user_type_id', 'user_type_id');
+    }
+
     /*
     |------------------------------------------------
     | Model general methods
