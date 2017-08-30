@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Users::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Users::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -100,6 +100,34 @@ $factory->define(
 );
 
 // Request Factory Business
+$factory->define(
+    App\Models\Business::class,
+    function (Faker\Generator $faker) {
+        return [
+        'business_user_id'  => App\Models\Users::inRandomOrder()->first()->user_id,
+        'business_name'     => isset($business_name) ?: $business_name = $faker->company,
+        'business_address'  => isset($business_address) ?: $business_address = $faker->streetAddress,
+        'business_city'     => App\Models\Cities::inRandomOrder()->first()->id,
+        'business_phone'    => isset($business_phone) ?: $business_phone = $faker->phoneNumber,
+        'business_mail'     => isset($business_mail) ?: $business_mail = $faker->companyEmail,
+        'business_postalcode' => isset($business_postalcode) ?: $business_postalcode = $faker->postcode,
+        'business_cat_id'   => App\Models\Subcategory::inRandomOrder()->first()->scat_id,
+        'bdetail_schedulle' => isset($bdetail_schedulle) ?: $bdetail_schedulle = $faker->sentence,
+        'bdetail_detail'    => isset($bdetail_detail) ?: $bdetail_detail = $faker->paragraph,
+        'bdetail_more_info' => isset($bdetail_more_info) ?: $bdetail_more_info = $faker->text,
+        'business_active'   => isset($business_active) ?: $business_active = 1,
+        ];
+    }
+);
 
 
 // Request Factory BusinessImages
+$factory->define(
+    App\Models\BusinessImages::class,
+    function (Faker\Generator $faker) {
+        return [
+        'bimages_business_id'  => App\Models\Business::inRandomOrder()->first()->business_id,
+        'bimages_route'         => isset($bimages_route) ?: $bimages_route = $faker->imageUrl,
+        ];
+    }
+);
