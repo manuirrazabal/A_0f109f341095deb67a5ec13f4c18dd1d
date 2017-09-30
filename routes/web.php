@@ -16,3 +16,12 @@
 // });
 
 Route::get('/', 'IndexController@index');
+
+Route::get('login', 'LoginController@login');
+Route::post('login', 'LoginController@login');
+
+Route::get('register', 'LoginController@register');
+Route::post('register', 'LoginController@register');
+
+Route::get('logout', 'LoginController@logout');
+

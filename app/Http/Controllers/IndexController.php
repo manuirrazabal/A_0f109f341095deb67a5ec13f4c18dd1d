@@ -22,6 +22,10 @@ class IndexController extends Controller
     		$data['categories'] = Session::get('categories');
     	}
 
+        if (Session::has('userInfo')) {
+            $data['userInfo'] = Session::get('userInfo');
+        }
+
     	return \View::make('container', $data);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Session;
 
 class Users extends Model
 {
@@ -74,4 +75,56 @@ class Users extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+    /**
+     * Create an user from form
+     *
+     * @var array
+     * @return Bolean
+     */
+    public function createUser(array $data = [])
+    {
+        try {
+            $user = $this->create($data);
+
+            if (Session::has('userInfo')) {
+                Session::forget('userInfo');
+            } else {
+                Session::put('userInfo', json_encode($user));
+            }
+
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        
+        return $resp;
+    }
+
+    public function loginUser($user, $password)
+    {
+        try {
+            $user = $this->where('user_email', $user)->where('user_password', $password)->first();
+            if (!empty($user)) {
+                $resp['ok'] = true;
+
+                if (Session::has('userInfo')) {
+                    Session::forget('userInfo');
+                } else {
+                    Session::put('userInfo', json_encode($user));
+                }
+            } else {
+                $resp['ok'] = false;
+                $resp['error'] = "Credenciales incorrectas";
+            }
+
+        }  catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+
+        return $resp;
+    }
 }
