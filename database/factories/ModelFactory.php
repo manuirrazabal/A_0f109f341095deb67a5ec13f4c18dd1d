@@ -12,16 +12,30 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Users::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'user_name'     => isset($user_name) ?: $user_name = $faker->name,
+        'user_lastname' => isset($user_lastname) ?: $user_lastname = $faker->lastName,
+        'user_email'    => isset($user_email) ?: $user_email = $faker->unique()->safeEmail,
+        'user_password' => isset($user_password) ?: $user_password =  bcrypt('secret'),
+        'user_phone'    => isset($user_phone) ?: $user_phone = $faker->phoneNumber,
+        'user_active'   => isset($user_active) ?: $user_active = 1,
+        'user_type_id'  => isset($user_type_id) ?: $user_type_id = 1,
         'remember_token' => str_random(10),
     ];
 });
+
+// Request Factory For Contries
+$factory->define(
+    App\Models\UserTypes::class,
+    function (Faker\Generator $faker) {
+        return [
+        'user_type_description'            => isset($user_type_description) ?: $user_type_description = $faker->word,
+        ];
+    }
+);
 
 // Request Factory For Contries
 $factory->define(
@@ -85,12 +99,17 @@ $factory->define(
     }
 );
 
+<<<<<<< HEAD
 
 // Request Factory For Bussiness
+=======
+// Request Factory Business
+>>>>>>> 4b184b4765e287e264daf00d999b29f0789bd09d
 $factory->define(
     App\Models\Business::class,
     function (Faker\Generator $faker) {
         return [
+<<<<<<< HEAD
         'business_name'         => isset($business_name) ?: $business_name = $faker->company,
         'business_address'      => isset($business_address) ?: $business_address = $faker->streetAddress,
         'business_city'         => App\Models\Cities::inRandomOrder()->first()->id,
@@ -100,6 +119,32 @@ $factory->define(
         'business_cat_id'        => App\Models\Subcategory::inRandomOrder()->first()->scat_id,
         'business_active'        => isset($business_active) ?: $business_active = 1,
         'business_user_id'        => App\Models\Users::inRandomOrder()->first()->user_id,
+=======
+        'business_user_id'  => App\Models\Users::inRandomOrder()->first()->user_id,
+        'business_name'     => isset($business_name) ?: $business_name = $faker->company,
+        'business_address'  => isset($business_address) ?: $business_address = $faker->streetAddress,
+        'business_city'     => App\Models\Cities::inRandomOrder()->first()->id,
+        'business_phone'    => isset($business_phone) ?: $business_phone = $faker->phoneNumber,
+        'business_mail'     => isset($business_mail) ?: $business_mail = $faker->companyEmail,
+        'business_postalcode' => isset($business_postalcode) ?: $business_postalcode = $faker->postcode,
+        'business_cat_id'   => App\Models\Subcategory::inRandomOrder()->first()->scat_id,
+        'bdetail_schedulle' => isset($bdetail_schedulle) ?: $bdetail_schedulle = $faker->sentence,
+        'bdetail_detail'    => isset($bdetail_detail) ?: $bdetail_detail = $faker->paragraph,
+        'bdetail_more_info' => isset($bdetail_more_info) ?: $bdetail_more_info = $faker->text,
+        'business_active'   => isset($business_active) ?: $business_active = 1,
+        ];
+    }
+);
+
+
+// Request Factory BusinessImages
+$factory->define(
+    App\Models\BusinessImages::class,
+    function (Faker\Generator $faker) {
+        return [
+        'bimages_business_id'  => App\Models\Business::inRandomOrder()->first()->business_id,
+        'bimages_route'         => isset($bimages_route) ?: $bimages_route = $faker->imageUrl,
+>>>>>>> 4b184b4765e287e264daf00d999b29f0789bd09d
         ];
     }
 );
