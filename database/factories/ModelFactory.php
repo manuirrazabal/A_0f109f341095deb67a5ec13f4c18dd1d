@@ -84,3 +84,22 @@ $factory->define(
         ];
     }
 );
+
+
+// Request Factory For Bussiness
+$factory->define(
+    App\Models\Business::class,
+    function (Faker\Generator $faker) {
+        return [
+        'business_name'         => isset($business_name) ?: $business_name = $faker->company,
+        'business_address'      => isset($business_address) ?: $business_address = $faker->streetAddress,
+        'business_city'         => App\Models\Cities::inRandomOrder()->first()->id,
+        'business_phone'        => isset($business_phone) ?: $business_phone = $faker->phoneNumber,
+        'business_mail'         => isset($business_mail) ?: $business_mail = $faker->companyEmail,
+        'business_postalcode'   => isset($business_postalcode) ?: $business_postalcode = $faker->postcode,
+        'business_cat_id'        => App\Models\Subcategory::inRandomOrder()->first()->scat_id,
+        'business_active'        => isset($business_active) ?: $business_active = 1,
+        'business_user_id'        => App\Models\Users::inRandomOrder()->first()->user_id,
+        ];
+    }
+);
