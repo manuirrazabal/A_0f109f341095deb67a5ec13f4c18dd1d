@@ -2,7 +2,6 @@
 /storage/*.key
 /vendor
 /.vagrant
-.vagrant/
 npm-debug.log
 .env
 *.bak
