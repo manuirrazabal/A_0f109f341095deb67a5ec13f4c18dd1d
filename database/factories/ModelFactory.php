@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Users::class, function (Faker\Generator $faker) {
+$factory->define(App\Users::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -123,12 +123,3 @@ $factory->define(
 
 
 // Request Factory BusinessImages
-$factory->define(
-    App\Models\BusinessImages::class,
-    function (Faker\Generator $faker) {
-        return [
-        'bimages_business_id'  => App\Models\Business::inRandomOrder()->first()->business_id,
-        'bimages_route'         => isset($bimages_route) ?: $bimages_route = $faker->imageUrl,
-        ];
-    }
-);
