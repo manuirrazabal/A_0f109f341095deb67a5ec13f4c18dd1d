@@ -21,11 +21,11 @@ class initComponents
          *  Checking if the categories are setup.
         **/
 
-        // if (!Session::has('categories')) {
-        //     $cat = (new Category)->getCategoriesAll();
-        //     Session::put('categories', $cat);
-        //     $request["categories"] = $cat;
-        // } 
+        if (!Session::has('categories')) {
+            $cat = (new Category)->getCategoriesAll();
+            Session::put('categories', $cat);
+            $request["categories"] = $cat;
+        } 
 
         return $next($request);
     }
