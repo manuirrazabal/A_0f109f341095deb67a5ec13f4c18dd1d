@@ -10,7 +10,7 @@ use Session;
 class LoginController extends Controller
 {
     
-	/**
+    /**
      * LOG-IN into application.
      *
      *  Still on development. 
@@ -19,17 +19,17 @@ class LoginController extends Controller
      *
      * @param  request $request
      **/
-	public function login(Request $request)
-	{
-		if (Session::has('userInfo')) {
+    public function login(Request $request)
+    {
+        if (Session::has('userInfo')) {
             return  redirect()->to('/');
         }
 
         if ($request->isMethod('post')) {
-			//Rules
-        	$rules = array(
-                'email' 	=> 'required|email',
-                'password' 	=> 'required',
+            //Rules
+            $rules = array(
+                'email'     => 'required|email',
+                'password'  => 'required',
             );
             $messages = array(
                 'email.required' => 'Please enter your email.',
@@ -47,33 +47,33 @@ class LoginController extends Controller
             $resp = $user->loginUser($request->input('email'), md5($request->input('password')));
            
             if ($resp['ok']) {
-            	return redirect()->to('/');
+                return redirect()->to('/');
             } else {
-            	return back()->withErrors([$resp['error']])->withInput();
+                return back()->withErrors([$resp['error']])->withInput();
             }
 
         }
 
         return \View::make('user.login');
-	}
+    }
 
-	/**
+    /**
      * REGISTER into application.
      *
      * @param  request $request
      **/
     public function register(Request $request)
     {
-    	if (Session::has('userInfo')) {
+        if (Session::has('userInfo')) {
             return  redirect()->to('/');
         }
 
         if ($request->isMethod('post')) {
-        	$rules = array(
+            $rules = array(
                 'first_name' => 'required',
                 'last_name' => 'required',
-                'email' 	=> 'required|email',
-                'password' 	=> 'required|min:6',
+                'email'     => 'required|email',
+                'password'  => 'required|min:6',
                 'password2' => 'required|same:password',
             );
 
@@ -109,23 +109,23 @@ class LoginController extends Controller
             $resp = $user->createUser($arr);
 
             if ($resp['ok']) {
-            	return redirect()->to('/');
+                return redirect()->to('/');
             } else {
-            	return back()->withErrors([$resp['error']])->withInput();
+                return back()->withErrors([$resp['error']])->withInput();
             }
         }
 
         return \View::make('user.register');
     }
 
-	/**
+    /**
      * LOGOUT of application.
      *
      * 
      **/
     public function logout()
     {
-    	if (Session::has('userInfo')) {
+        if (Session::has('userInfo')) {
             Session::forget('userInfo');
         }
 

@@ -18,10 +18,15 @@ class IndexController extends Controller
 
     public function index()
     {
-    	if (Session::has('categories')) {
-    		$data['categories'] = Session::get('categories');
-    	}
 
-    	return \View::make('container', $data);
+        if (Session::has('categories')) {
+            $data['categories'] = Session::get('categories');
+        }
+
+        if (Session::has('userInfo')) {
+            $data['userInfo'] = Session::get('userInfo');
+        }
+
+        return \View::make('container', $data);
     }
 }
