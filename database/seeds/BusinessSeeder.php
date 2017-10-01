@@ -14,23 +14,15 @@ class BusinessSeeder extends Seeder
      */
     public function run()
     {
-       //Create Faker for business 
-    	$business = factory(Business::class, 1)->create(
+        //Create Faker for business 
+        for ($i=0; $i < 50; $i++) { 
+            $business = factory(Business::class, 1)->create(); 
+            factory(BusinessImages::class, 2)->create(
                 [
-                    'business_user_id' 	=>  Users::inRandomOrder()->first()->user_id,
-                    'business_name' 	=> company,
-                    'business_address' 	=> ,
-                    'business_city' 	=> ,
-                    'business_phone' 	=> ,
-                    'business_mail' 	=> ,
-                    'business_postalcode' => ,
-                    'business_cat_id' 	=> ,
-                    'bdetail_schedulle' => ,
-                    'bdetail_detail' 	=> ,
-                    'bdetail_more_info' => ,
-                    'business_active'	=> ,
+                'bimages_business_id' => $business->first()->business_id,
                 ]
-            ); 
+            );
+        }
 
        
     }
