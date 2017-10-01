@@ -18,11 +18,15 @@ class BusinessSeeder extends Seeder
        	for ($i=0; $i < 50; $i++) { 
        		$business = factory(Business::class, 1)->create(); 
 
-       		factory(BusinessImages::class, 1)->create(
+       		factory(Business::class, 1)->create(
        			[
        			'bimages_business_id' => $business->first()->business_id,
        			]
        		);
        	}
+    	
+
+
+       
     }
 }
