@@ -24,5 +24,5 @@ Route::get('register', 'LoginController@register');
 Route::post('register', 'LoginController@register');
 
 Route::get('logout', 'LoginController@logout');
-
+Route::get('profile', 'ProfileController@index');
 

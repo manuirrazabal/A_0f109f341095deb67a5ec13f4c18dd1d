@@ -51,7 +51,6 @@ class LoginController extends Controller
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }
-
         }
 
         return \View::make('user.login');
