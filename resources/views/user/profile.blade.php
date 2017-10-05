@@ -17,9 +17,9 @@
 
                         <div class="widget">
 						    <ul class="menu-advanced">
-						    	<li><a href=""><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
-						    	<li><a href=""><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
-						        <li class="active"><a href="#"><i class="fa fa-user"></i>Mi Perfil</a></li>
+						    	<li><a href="#"><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
+						    	<li><a href="#"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
+						        <li class="active"><a href="{{  url('/profile') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
 						        <li><a href="#"><i class="fa fa-key"></i> Cambiar Contraseña</a></li>
 						        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Cerrar Sesion</a></li>
 						    </ul>
