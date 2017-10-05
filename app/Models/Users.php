@@ -84,8 +84,8 @@ class Users extends Model
     /**
      * Create an user from form
      *
-     * @var array
-     * @return Bolean
+     * @param array
+     * @return Boolean
      */
     public function createUser(array $data = [])
     {
@@ -108,6 +108,46 @@ class Users extends Model
         return $resp;
     }
 
+    /**
+     * Update an user
+     *
+     * @param array Data
+     * @param integer id
+     * @return Boolean
+     */
+    public function updateUser(array $data = [], $id)
+    {
+        try {
+            $user = $this->where('user_id', $id)->update($data);
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        
+        return $resp;
+    }
+
+    /**
+     * GET user information from id 
+     *
+     * @param integer id
+     * @return Boolean
+     */
+    public function getUserId($id)
+    {
+        return $this->findOrFail($id)->first();;
+    }
+
+
+    /**
+     * Login an user.
+     *
+     * @param String $user
+     * @param String $password
+     * @return Boolean
+     */
     public function loginUser($user, $password)
     {
         try {
