@@ -26,4 +26,7 @@ Route::post('register', 'LoginController@register');
 Route::get('logout', 'LoginController@logout');
 Route::get('profile', 'ProfileController@index');
 Route::post('profile', 'ProfileController@index');
+Route::get('password', 'ProfileController@password');
+Route::post('password', 'ProfileController@password');
+
 
