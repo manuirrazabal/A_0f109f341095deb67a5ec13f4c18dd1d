@@ -51,7 +51,6 @@ class LoginController extends Controller
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }
-
         }
 
         return \View::make('user.login');
@@ -102,7 +101,7 @@ class LoginController extends Controller
                 'user_password' => md5($request->input('password')),
                 'user_phone' => $request->input('phone'),
                 'user_active' => 1,
-                'user_type_id' => 1
+                'user_type_id' => 2
             );
 
             $user = new Users;

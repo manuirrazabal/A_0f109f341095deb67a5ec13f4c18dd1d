@@ -84,13 +84,20 @@ class Users extends Model
     /**
      * Create an user from form
      *
-     * @var array
-     * @return Bolean
+     * @param array
+     * @return Boolean
      */
     public function createUser(array $data = [])
     {
         try {
             $user = $this->create($data);
+
+            // Delete some data from array. 
+            unset($user['user_password']);
+            unset($user['created_at']);
+            unset($user['updated_at']);
+            unset($user['deleted_at']);
+            unset($user['user_type_id']);
 
             if (Session::has('userInfo')) {
                 Session::forget('userInfo');
@@ -108,6 +115,46 @@ class Users extends Model
         return $resp;
     }
 
+    /**
+     * Update an user
+     *
+     * @param array Data
+     * @param integer id
+     * @return Boolean
+     */
+    public function updateUser(array $data = [], $id)
+    {
+        try {
+            $user = $this->where('user_id', $id)->update($data);
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        
+        return $resp;
+    }
+
+    /**
+     * GET user information from id 
+     *
+     * @param integer id
+     * @return Boolean
+     */
+    public function getUserId($id)
+    {
+        return $this->findOrFail($id)->first();;
+    }
+
+
+    /**
+     * Login an user.
+     *
+     * @param String $user
+     * @param String $password
+     * @return Boolean
+     */
     public function loginUser($user, $password)
     {
         try {
@@ -115,6 +162,13 @@ class Users extends Model
             if (!empty($user)) {
                 $resp['ok'] = true;
 
+                // Delete some data from array. 
+                unset($user['user_password']);
+                unset($user['created_at']);
+                unset($user['updated_at']);
+                unset($user['deleted_at']);
+                unset($user['user_type_id']);
+                
                 if (Session::has('userInfo')) {
                     Session::forget('userInfo');
                 } else {
@@ -131,5 +185,55 @@ class Users extends Model
         }
 
         return $resp;
+    }
+
+     /**
+     * Change password an user.
+     *
+     * @param Integer $id
+     * @param String $password
+     * @return Boolean
+     */
+    public function changePasswordUser($id, $password)
+    {
+        try {
+             $user = $this->where('user_id', $id)->update(['user_password' => $password]);
+            if (!empty($user)) {
+                $resp['ok'] = true;
+                
+            } else {
+                $resp['ok'] = false;
+                $resp['error'] = "Credenciales incorrectas";
+            }
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+
+         return $resp;
+    }
+
+    /**
+     * Check if the password is the same like the user has.
+     *
+     * @param Integer $id
+     * @param String $password
+     * @return Boolean
+     */
+    public function checkPassword($id, $password)
+    {
+        try {
+             $user = $this->where('user_id', $id)->where('user_password', $password)->first();
+            if (!empty($user)) {
+                return true;
+                
+            } else {
+                return false;
+            }
+
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

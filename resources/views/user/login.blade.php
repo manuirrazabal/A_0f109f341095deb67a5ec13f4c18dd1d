@@ -7,7 +7,7 @@
                 <div class="row">
     				<div class="col-sm-8 col-sm-offset-2">
 				        <div class="page-title">
-				            <h1>Login</h1>
+				            <h1>Iniciar Sesion</h1>
 				        </div><!-- /.page-title -->
 
 				        @if(!empty($errors->all()))
@@ -29,11 +29,11 @@
 				            </div><!-- /.form-group -->
 
 				            <div class="form-group">
-				                <label for="login-form-password">Password</label>
+				                <label for="login-form-password">Contraseña</label>
 				                <input type="password" class="form-control" name="password" id="login-form-password">
 				            </div><!-- /.form-group -->
 
-				            <button type="submit" class="btn btn-primary pull-right">Iniciar Session</button>
+				            <button type="submit" class="btn btn-primary pull-right">Iniciar</button>
 				        </form>
     				</div><!-- /.col-sm-4 -->
 				</div><!-- /.row -->
