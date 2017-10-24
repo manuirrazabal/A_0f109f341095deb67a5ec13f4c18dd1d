@@ -54,4 +54,26 @@ class Cities extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+     /**
+     * List State Father from City Id
+     *
+     * @param Integer city_id
+     * @return Integer
+     */
+    public function listStateFather($id)
+    {
+        return $this->where('id', $id)->first()->city_state_id;
+    }
+
+     /**
+     * List Cities From States
+     *
+     * @param Integer id
+     * @return Array
+     */
+    public function listCitiesByState($id)
+    {
+        return $this->where('city_state_id', $id)->select('city_name', 'id')->get();
+    }
 }

@@ -55,4 +55,26 @@ class Subcategory extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+    /**
+     * Get Category by their subcategory
+     *
+     * @param Integer $id
+     * @return Integer Scat_cat_id
+     */
+    public function getCategoryFather($id)
+    {
+        return $this->where('scat_id', $id)->first()->scat_cat_id;
+    }
+
+    /**
+     * Get SubCategory by their category id
+     *
+     * @param Integer $id
+     * @return Array
+     */
+    public function getSubcatoryById($id)
+    {
+        return $this->where('scat_cat_id', $id)->orderBy('scat_order')->get();
+    }
 }

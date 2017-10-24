@@ -19,9 +19,9 @@
 
                         <div class="widget">
 						    <ul class="menu-advanced">
-						    	<li><a href="{{  url('/business') }}"><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
+						    	<li class="active"><a href="{{  url('/business') }}"><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
 						    	<li><a href="{{ url('/business/nuevo') }}"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
-						        <li class="active"><a href="{{  url('/profile') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
+						        <li><a href="{{  url('/profile') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
 						        <li><a href="{{  url('/password') }}"><i class="fa fa-key"></i> Cambiar Contraseña</a></li>
 						        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Cerrar Sesion</a></li>
 						    </ul>
@@ -33,7 +33,7 @@
                     <div class="col-sm-8 col-lg-9">
                         <div class="content">
                             <div class="page-title">
-    							<h1>Editar Perfil</h1>
+    							<h1>Mis Anuncios</h1>
 							</div><!-- /.page-title -->
 
 							<div class="background-white p20 mb30">
@@ -52,46 +52,44 @@
 									<div class="alert alert-success" role="alert">
 					                    {{ Session::get('message') }}
 					                </div>
+					            @elseif(Session::has('error'))
+					            	<div class="alert alert-danger" role="alert">
+					                    {{ Session::get('error') }}
+					                </div>
 								@endif
 
-
-								@if(isset($userInfo))
-									@php
-	                                    $userInfo = json_decode($userInfo);
-	                                @endphp
-
-								<form method="post" action="?">
-									{{ csrf_field() }}
-
-								    <h3 class="page-title">
-								        Informaci&oacute;n de cont&aacute;cto
-								        <button type="submit" class="btn btn-primary  btn-xs pull-right">Actualizar</button>
-								    </h3>
-
-								    <div class="row">
-								        <div class="form-group col-sm-6">
-								            <label>Nombre</label>
-								            <input type="text" class="form-control" name="first_name" id="login-form-first-name" value="{{ $userInfo->user_name }}">
-								        </div><!-- /.form-group -->
-
-								        <div class="form-group col-sm-6">
-								            <label>Apellido</label>
-								            <input type="text" class="form-control" name="last_name" id="login-form-last-name" value="{{ $userInfo->user_lastname }}">
-								        </div><!-- /.form-group -->
-
-								        <div class="form-group col-sm-6">
-								            <label>E-mail</label>
-								            <input type="text" class="form-control" name="email" id="login-form-email" value="{{ $userInfo->user_email }}" disabled="disabled">
-								        </div><!-- /.form-group -->
-
-								        <div class="form-group col-sm-6">
-								            <label>Telefono</label>
-								            <input type="text" class="form-control" name="phone" id="login-form-phone" value="{{ $userInfo->user_phone }}">
-								        </div><!-- /.form-group -->
-								    </div><!-- /.row -->
-								</form>
-
-								@endif
+								@if(isset($business) && count($business) >= 1)
+							        <table class="table table-hover mb0">
+							            <thead>
+								            <tr>
+								                <th>Nombre</th>
+								                <th>Direccion</th>
+								                <th></th>
+								            </tr>
+							            </thead>
+							            <tbody>
+							            	@foreach($business as $bu)
+							            		 <tr>
+									                <td>{{ $bu->business_name }}</td>
+									                <td>{{ $bu->business_address }}</td>
+									                <td>
+									                	<a href="{{ url('/business/imagenes') }}/{{ $bu->business_id }}" title="Editar Imagenes"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
+									                	&nbsp;
+									                	
+									                	<a href="{{ url('/business/editar') }}/{{ $bu->business_id }}" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+									                	&nbsp;
+									               	 	<a href="javascript:deleteBusiness({{ $bu->business_id }});" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									               	</td>
+									            </tr>
+							            	@endforeach
+							            </tbody>
+							        </table>
+							    @else
+							    	<div class="alert alert-info" role="alert">
+					                    <strong>Uppss</strong> Pareciera que aun no tienes ningun negocio listado.
+					                </div>
+							    @endif
+								
 							</div>
                         </div><!-- /.content -->
                     </div><!-- /.col-* -->

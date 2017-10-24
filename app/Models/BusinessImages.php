@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BusinessImages extends Model
 {
+
     /**
      * Included model traits
      */
@@ -59,4 +60,56 @@ class BusinessImages extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+    /**
+     * GET ALL business images from specific business..
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getAll($id)
+    {
+        return $this->where('bimages_business_id', $id)->get();
+    }
+
+    /**
+     * ADD an business image
+     *
+     * @param array data
+     * @return object
+     */
+    public function addImage($data)
+    {
+        try {
+            $this->create($data);
+            $resp['ok'] = true;
+            
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        return $resp;
+    }
+
+    /**
+     * GET an business image by their ID
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getImageDetail($id)
+    {
+        return $this->findOrFail($id);
+    }
+
+    /**
+     * HARD DELETE an image
+     *
+     * @param integer id
+     * @return object
+     */
+    public function hardDelete($id)
+    {
+        //$flight->forceDelete();
+    }
 }
