@@ -20,7 +20,7 @@
                         <div class="widget">
 						    <ul class="menu-advanced">
 						    	<li class="active"><a href="{{  url('/business') }}"><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
-						    	<li><a href="#"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
+						    	<li><a href="{{ url('/business/nuevo') }}"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
 						        <li><a href="{{  url('/profile') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
 						        <li><a href="{{  url('/password') }}"><i class="fa fa-key"></i> Cambiar Contraseña</a></li>
 						        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Cerrar Sesion</a></li>
@@ -55,11 +55,22 @@
 								@endif
 
 								<div class="row">
+									<div class="col-sm-12">
+										<h3 class="page-title">
+									        Detalle de Anuncio
+									        <a href="{{ url('/business') }}" class="btn btn-primary pull-right" role="button">Atras</a>
+									    </h3>
+									</div>
+								</div>
+
+								<div class="row">
 									@if(!empty($businessImages))
-										<div class="alert alert-info" role="alert">
-						                    <strong>{{  'Atenci&oacute;n' }}</strong> 
-						                    Para eliminar imagenes, s&oacute;lo hacer click sobre la imagen.
-						                </div>
+										<div class="col-sm-12">
+											<div class="alert alert-info" role="alert">
+							                    <strong>{{  'Atenci&oacute;n' }}</strong> 
+							                    Para eliminar imagenes, s&oacute;lo hacer click sobre la imagen.
+							                </div>
+							            </div>
 										@foreach($businessImages as $img)
 											<div class="col-sm-3">
 									            <div class="center thumbnail">
@@ -80,7 +91,7 @@
 								
 								<div class="row">
 									<div class="p30 mb30 background-white left">
-										<h2 class="page-title">Sube tu imagen</h2>
+										<h3 class="page-title">Sube tu imagen</h3>
 										<form method="post" action="?" enctype="multipart/form-data">
 											{{ csrf_field() }}
 											<input type="hidden" name="bimagenId" id="bimagenId" value="{{ $id }}">

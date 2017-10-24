@@ -20,7 +20,7 @@
                         <div class="widget">
 						    <ul class="menu-advanced">
 						    	<li class="active"><a href="{{  url('/business') }}"><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
-						    	<li><a href="#"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
+						    	<li><a href="{{ url('/business/nuevo') }}"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
 						        <li><a href="{{  url('/profile') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
 						        <li><a href="{{  url('/password') }}"><i class="fa fa-key"></i> Cambiar Contraseña</a></li>
 						        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Cerrar Sesion</a></li>
@@ -56,6 +56,11 @@
 
 								@if(isset($businessDetail))
 					                <form method="post" action="?">
+					                	<h3 class="page-title">
+									        Detalle de Anuncio
+									        <a href="{{ url('/business') }}" class="btn btn-primary pull-right" role="button">Atras</a>
+									    </h3>
+
 					                	{{ csrf_field() }}
 					                    <div class="form-group">
 					                        <label for="businessName">Nombre</label>
