@@ -22,7 +22,7 @@ class InitialMigration extends Migration
                 $table->string('user_lastname', 128);
                 $table->string('user_email')->unique();
                 $table->string('user_password');
-                $table->string('user_phone');
+                $table->string('user_phone')->nullable();
                 $table->boolean('user_active')->default(1);
                 $table->integer('user_type_id');
                 $table->rememberToken();
@@ -51,12 +51,12 @@ class InitialMigration extends Migration
                 $table->string('business_address');
                 $table->integer('business_city');
                 $table->string('business_phone');
-                $table->string('business_mail');
-                $table->string('business_postalcode');
+                $table->string('business_mail')->nullable();
+                $table->string('business_postalcode')->nullable();
                 $table->integer('business_cat_id');
-                $table->text('bdetail_schedulle');
-                $table->text('bdetail_detail');
-                $table->text('bdetail_more_info');
+                $table->text('bdetail_schedulle')->nullable();
+                $table->text('bdetail_detail')->nullable();
+                $table->text('bdetail_more_info')->nullable();
                 $table->boolean('business_active')->default(1);
                 $table->timestamps();
                 $table->softDeletes();
