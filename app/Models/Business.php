@@ -88,7 +88,7 @@ class Business extends Model
     }
 
     /**
-     * Get all business from specific user..
+     * Get a specific business from an user..
      *
      * @param integer id user
      * @param integer idBusiness 
@@ -96,6 +96,55 @@ class Business extends Model
      */
     public function getBusinessById($id, $idBusiness)
     {
-        return $this->where('business_user_id', $id)->findOrFail($idBusiness);
+        return $this->where('business_user_id', $idBusiness)->findOrFail($id);
+    }
+
+    /**
+     * Update a business
+     *
+     * @param array Data
+     * @param integer id
+     * @return Boolean
+     */
+    public function updateBusiness(array $data = [], $id)
+    {
+        try {
+            $user = $this->where('business_id', $id)->update($data);
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        
+        return $resp;
+    }
+
+    /**
+     * DELETE a business
+     *
+     * @param array Data
+     * @param integer id
+     * @return Boolean
+     */
+    public function deleteBusiness($id, $iduser)
+    {
+        try {
+            $business = $this->where('business_id', $id)->where('business_user_id', $iduser)->delete();
+
+            //Successfull Delete.
+            if ($business == 1) {
+                
+            }
+
+            // For the moment delete only images. 
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        
+        return $resp;
     }
 }

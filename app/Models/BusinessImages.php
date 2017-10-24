@@ -59,4 +59,15 @@ class BusinessImages extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+    /**
+     * GET ALL business images from specific business..
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getAll($id)
+    {
+        return $this->where('bimages_business_id', $id)->get();
+    }
 }

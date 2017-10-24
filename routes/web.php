@@ -29,4 +29,16 @@ Route::post('profile', 'ProfileController@index');
 Route::get('password', 'ProfileController@password');
 Route::post('password', 'ProfileController@password');
 
+//Business..
+Route::get('business', 'BusinessController@index');
+Route::get('business/delete/{id}', 'BusinessController@delete');
+Route::get('business/editar/{id}', 'BusinessController@edit');
+Route::post('business/editar/{id}', 'BusinessController@edit');
+Route::get('business/imagenes/{id}', 'BusinessController@images');
+Route::post('business/imagenes/{id}', 'BusinessController@images');
+
+
+//Protected Routes 
+Route::get('ajax/state/{id}', 'AjaxController@states');
+Route::get('ajax/subcategory/{id}', 'AjaxController@subcategory');
 
