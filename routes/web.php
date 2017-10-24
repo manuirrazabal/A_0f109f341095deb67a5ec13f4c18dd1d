@@ -42,7 +42,7 @@ Route::post('business/imagenes/{id}', 'BusinessController@images');
 Route::get('ajax/state/{id}', 'AjaxController@states');
 Route::get('ajax/subcategory/{id}', 'AjaxController@subcategory');
 
-Route::get('storage/{filename}', function ($filename)
+Route::get('storage/uploads/{filename}', function ($filename)
 {
     $path = storage_path('app/uploads/' . $filename);
 

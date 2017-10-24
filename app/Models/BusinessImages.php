@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BusinessImages extends Model
 {
-    /**
-     * Included model traits
-     */
-    use SoftDeletes;
 
     /**
      * Table name
@@ -31,7 +27,7 @@ class BusinessImages extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['created_at', 'updated_at'];
 
     /**
      * The attributes that are mass assignable.

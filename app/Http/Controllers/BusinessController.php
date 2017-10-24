@@ -181,7 +181,7 @@ class BusinessController extends Controller
             //UPLOAD IMAGE.  
             $fileName = "image-".json_decode($data['userInfo'])->user_id."-".$id."-".Carbon::now()->timestamp.".".$request->file('bimageUpload')->getClientOriginalExtension();
      
-            $path = Storage::putFileAs('', $request->file('bimageUpload'), $fileName, 'public');
+            $path = Storage::putFileAs('uploads', $request->file('bimageUpload'), $fileName, 'public');
             if ($path) {
                 $resp = (new BusinessImages)->addImage(['bimages_business_id' => $id, 'bimages_route' => $path]);
 
