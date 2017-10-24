@@ -60,4 +60,16 @@ class States extends Model
     | Model general methods
     |------------------------------------------------
     */
+
+     /**
+     * List States by Country.
+     *
+     * @param array
+     * @return Boolean
+     */
+    public function listStatesByCountry($country)
+    {
+        return $this->where('state_country_id', $country)->get();
+    }
+
 }
