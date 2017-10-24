@@ -55,3 +55,10 @@ function deleteBusiness(id)
         window.location.replace("/business/delete/"+id);
     } 
 }
+
+function deleteImages(id) 
+{
+    if (confirm('Estas seguro que deseas eliminar esta imagen?')) {
+        window.location.replace("/business/imagenes/"+id+"/delete");
+    } 
+}

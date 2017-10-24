@@ -56,15 +56,20 @@
 
 								<div class="row">
 									@if(!empty($businessImages))
+										<div class="alert alert-info" role="alert">
+						                    <strong>{{  'Atenci&oacute;n' }}</strong> 
+						                    Para eliminar imagenes, s&oacute;lo hacer click sobre la imagen.
+						                </div>
 										@foreach($businessImages as $img)
 											<div class="col-sm-3">
-									            <div class="p30 mb30 background-white center">
+									            <div class="center thumbnail">
+									            	<a href="javascript:deleteImages({{ $img->bimages_id }});" title="Eliminar">
 									            	@if(substr($img->bimages_route, 0, 4) == "http")
-									            		<img src="{{ $img->bimages_route }}" alt="" class="img-thumbnail" />
+									            		<img src="{{ $img->bimages_route }}" alt="" />
 									            	@else
-									            		<img src="{{ url('storage/'.$img->bimages_route) }}" alt="" class="img-thumbnail" />
+									            		<img src="{{ url('storage/'.$img->bimages_route) }}" alt="" />
 									            	@endif
-									                
+									                </a>	
 									            </div>
 									        </div><!-- /.col-* -->
 										@endforeach
@@ -79,11 +84,14 @@
 										<form method="post" action="?" enctype="multipart/form-data">
 											{{ csrf_field() }}
 											<input type="hidden" name="bimagenId" id="bimagenId" value="{{ $id }}">
-											<div class="form-group">
-						                        <label for="exampleInputFile">Agregar</label>
-						                        <input type="file" name="bimageUpload" id="bimageUpload">
-						                    </div>	
-						                    <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Submit</button>					                    
+											<div class="row">
+												<div class="col-sm-9">
+													 <input type="file" name="bimageUpload" id="bimageUpload">
+												</div>
+												<div class="col-sm-3">
+													<button type="submit" class="btn btn-primary">Subir Imagen</button>	
+												</div>
+											</div>	                    
 					                    </form>
 				                	</div>
 			                	</div>

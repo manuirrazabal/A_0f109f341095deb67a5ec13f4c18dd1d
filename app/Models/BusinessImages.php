@@ -9,6 +9,11 @@ class BusinessImages extends Model
 {
 
     /**
+     * Included model traits
+     */
+    use SoftDeletes;
+
+    /**
      * Table name
      *
      * @var string
@@ -27,7 +32,7 @@ class BusinessImages extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -84,5 +89,27 @@ class BusinessImages extends Model
             $resp['error'] = $e->getMessage();
         }
         return $resp;
+    }
+
+    /**
+     * GET an business image by their ID
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getImageDetail($id)
+    {
+        return $this->findOrFail($id);
+    }
+
+    /**
+     * HARD DELETE an image
+     *
+     * @param integer id
+     * @return object
+     */
+    public function hardDelete($id)
+    {
+        //$flight->forceDelete();
     }
 }

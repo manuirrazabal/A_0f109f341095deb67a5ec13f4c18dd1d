@@ -195,4 +195,49 @@ class BusinessController extends Controller
 
         return \View::make('user.business-images', $data);
     }
+
+    /**
+     *  DELETE business images.
+     *
+     **/
+    public function deleteImages($id)
+    {
+        //Like always, check the user information, move into a middleware later
+        if (!Session::has('userInfo')) {
+            return redirect()->to('/login');
+        }
+
+        //If doenst exist the id and if null, sent to login page. 
+        if (!isset($id) && empty($id)) {
+            return redirect()->to('/login');
+        }
+
+        $image = (new BusinessImages)->getImageDetail($id);
+        if (isset($image)) {
+            //If the image doesnt start with http. 
+            if (isset($image->bimages_route) && substr($image->bimages_route, 0, 4) != "http") {
+                //Proceed to delete the image. 
+                if (Storage::disk('uploads')->exists($image->bimages_route)) {
+                    Storage::disk('uploads')->delete($image->bimages_route);
+                } else {
+                    return back()->withErrors(["Opps Algo sucedio, la imagen no existe"])->withInput();
+                }
+            }
+
+            $businesId = $image->bimages_business_id;
+
+            //DELETE the RECORD FROM DATABASE.
+            $delete = $image->forceDelete();
+
+            if ($delete) {
+                 return redirect()->to('/business/imagenes/'.$businesId)->with('message', 'Imagen eliminada exitosamente');
+            } else {
+                return back()->withErrors(["Opps Algo sucedio, que no esperabamos"])->withInput();
+            }
+
+        }
+
+
+
+    }
 }

@@ -36,6 +36,8 @@ Route::get('business/editar/{id}', 'BusinessController@edit');
 Route::post('business/editar/{id}', 'BusinessController@edit');
 Route::get('business/imagenes/{id}', 'BusinessController@images');
 Route::post('business/imagenes/{id}', 'BusinessController@images');
+Route::get('business/imagenes/{id}/delete', 'BusinessController@deleteImages');
+
 
 
 //Protected Routes 
