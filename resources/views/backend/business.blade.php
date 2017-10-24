@@ -37,26 +37,7 @@
 							</div><!-- /.page-title -->
 
 							<div class="background-white p20 mb30">
-								@if(!empty($errors->all()))
-							        <div class="alert alert-danger" role="alert">
-					                    <strong>{{  'Error!' }}</strong> 
-					                    <ul>
-								            @foreach($errors->all() as $key=>$error)
-								            <li>{!! $error !!}</li>
-								            @endforeach
-								        </ul>
-					                </div>
-								@endif
-
-								@if(Session::has('message'))
-									<div class="alert alert-success" role="alert">
-					                    {{ Session::get('message') }}
-					                </div>
-					            @elseif(Session::has('error'))
-					            	<div class="alert alert-danger" role="alert">
-					                    {{ Session::get('error') }}
-					                </div>
-								@endif
+								@include('backend.includes.error-messages')
 
 								@if(isset($business) && count($business) >= 1)
 							        <table class="table table-hover mb0">

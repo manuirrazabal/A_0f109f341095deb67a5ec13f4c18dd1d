@@ -32,7 +32,7 @@ class BusinessController extends Controller
         //List business from user. 
         $bus = new Business;
         $data['business'] = $bus->getBusiness(json_decode($data['userInfo'])->user_id);
-        return \View::make('user.business', $data);
+        return \View::make('backend.business', $data);
     }
 
      /**
@@ -107,7 +107,7 @@ class BusinessController extends Controller
             }
         }
 
-        return \View::make('user.business-new', $data);
+        return \View::make('backend.business-new', $data);
     }
 
     /**
@@ -180,7 +180,7 @@ class BusinessController extends Controller
             }
         }
 
-        return \View::make('user.business-edit', $data);
+        return \View::make('backend.business-edit', $data);
     }
 
     /**
@@ -253,7 +253,7 @@ class BusinessController extends Controller
             }
         }
 
-        return \View::make('user.business-images', $data);
+        return \View::make('backend.business-images', $data);
     }
 
     /**

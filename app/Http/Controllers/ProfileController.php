@@ -65,7 +65,7 @@ class ProfileController extends Controller
             }
         }
 
-        return \View::make('user.profile', $data);
+        return \View::make('backend.profile', $data);
     }
 
      /**
@@ -121,7 +121,7 @@ class ProfileController extends Controller
             }       
         }
 
-        return \View::make('user.password', $data);
+        return \View::make('backend.password', $data);
 
     }
 }
