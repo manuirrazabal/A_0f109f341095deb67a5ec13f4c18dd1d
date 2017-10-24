@@ -70,4 +70,23 @@ class BusinessImages extends Model
     {
         return $this->where('bimages_business_id', $id)->get();
     }
+
+    /**
+     * ADD an business image
+     *
+     * @param array data
+     * @return object
+     */
+    public function addImage($data)
+    {
+        try {
+            $this->create($data);
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        return $resp;
+    }
 }

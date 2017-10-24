@@ -59,7 +59,12 @@
 										@foreach($businessImages as $img)
 											<div class="col-sm-3">
 									            <div class="p30 mb30 background-white center">
-									                <img src="{{ $img->bimages_route }}" alt="" class="img-thumbnail" />
+									            	@if(substr($img->bimages_route, 0, 4) == "http")
+									            		<img src="{{ $img->bimages_route }}" alt="" class="img-thumbnail" />
+									            	@else
+									            		<img src="{{ url('storage/'.$img->bimages_route) }}" alt="" class="img-thumbnail" />
+									            	@endif
+									                
 									            </div>
 									        </div><!-- /.col-* -->
 										@endforeach
@@ -71,7 +76,7 @@
 								<div class="row">
 									<div class="p30 mb30 background-white left">
 										<h2 class="page-title">Sube tu imagen</h2>
-										<form method="post" action="?">
+										<form method="post" action="?" enctype="multipart/form-data">
 											{{ csrf_field() }}
 											<input type="hidden" name="bimagenId" id="bimagenId" value="{{ $id }}">
 											<div class="form-group">

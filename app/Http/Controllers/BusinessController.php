@@ -10,7 +10,9 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Session;
+use Carbon\Carbon;
 
 class BusinessController extends Controller
 {
@@ -161,7 +163,7 @@ class BusinessController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = array(
-                'bimageUpload'      => 'required|image',
+                'bimageUpload'      => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             );
 
             $messages = array(
@@ -176,8 +178,19 @@ class BusinessController extends Controller
                 return back()->withErrors($validator)->withInput();
             }
 
-            //UPLOAD IMAGE.
-            
+            //UPLOAD IMAGE.  
+            $fileName = "image-".json_decode($data['userInfo'])->user_id."-".$id."-".Carbon::now()->timestamp.".".$request->file('bimageUpload')->getClientOriginalExtension();
+     
+            $path = Storage::putFileAs('', $request->file('bimageUpload'), $fileName, 'public');
+            if ($path) {
+                $resp = (new BusinessImages)->addImage(['bimages_business_id' => $id, 'bimages_route' => $path]);
+
+                if ($resp['ok']) {
+                    return redirect()->to('/business/imagenes/'.$id)->with('message', 'Imagen agregada exitosamente');
+                } else {
+                    return back()->withErrors([$resp['error']])->withInput();
+                }
+            }
         }
 
         return \View::make('user.business-images', $data);
