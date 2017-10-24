@@ -35,13 +35,77 @@ class BusinessController extends Controller
         return \View::make('user.business', $data);
     }
 
-    public function new(Request $request)
+     /**
+     *  ADD, a new business
+     *
+     **/
+    public function add(Request $request)
     {
     	//Like always, check the user information, move into a middleware later
     	if (!Session::has('userInfo')) {
             return redirect()->to('/login');
         }
+        $data['userInfo']   = Session::get('userInfo');
 
+        // Checking if the user doesnt have more than 3 records. 
+        if ((new Business)->countBusiness(json_decode($data['userInfo'])->user_id) > 3) {
+            return redirect()->to('/business')->with('error', 'Lo sentimos. No puedes crear mas de tres anuncios.');
+        }
+
+        //List business from user. 
+        $bus = new Business;
+        $data['regiones']   = (new States)->listStatesByCountry(43);
+        $data['categorias'] = (new Category)->getCategoriesAll();
+        
+
+        // POST
+        if ($request->isMethod('post')) {
+            $rules = array(
+                'businessName'      => 'required|string',
+                'businessAddress'   => 'required|string',
+                'businessState'     => 'required',
+                'businessCity'      => 'required',
+                'businessEmail'     => 'required',
+                'businessCategory'  => 'required',
+                'businessSubcategory' => 'required'
+            );
+
+            $messages = array(
+                'businessName.required' => 'Por favor ingresar el nombre',
+                'businessAddress.required' => 'Por favor ingresar la direccion',
+            );
+
+            $dataValidation = $request->all();
+            $validator = Validator::make($dataValidation, $rules, $messages);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+
+            $arr = array(
+                'business_name' => $request->input('businessName'),
+                'business_address' => $request->input('businessAddress'),
+                'business_city' => $request->input('businessCity'),
+                'business_phone' => $request->input('businessPhone'),
+                'business_mail' => $request->input('businessEmail'),
+                'business_postalcode' => $request->input('businessPostal'),
+                'business_cat_id' => $request->input('businessSubcategory'),
+                'bdetail_detail' => $request->input('businessDetail'),
+                'bdetail_schedulle' => $request->input('businessSchedulle'),
+                'bdetail_more_info' => $request->input('businessMoreInformation'),
+                'business_active'   => 1,
+                'business_user_id'  => json_decode($data['userInfo'])->user_id,
+
+            );
+
+            $resp = $bus->addBusiness($arr);
+
+            if ($resp['ok']) {
+                return redirect()->to('/business/imagenes/'.$resp['id'])->with('message', 'Tu anuncio ya fue creado, ahora puedes agregar tus imagenes.');
+            } else {
+                return back()->withErrors([$resp['error']])->withInput();
+            }
+        }
 
         return \View::make('user.business-new', $data);
     }
@@ -78,12 +142,8 @@ class BusinessController extends Controller
                 'businessState'     => 'required',
                 'businessCity'      => 'required',
                 'businessEmail'     => 'required',
-                'businessPostal'    => 'string',
                 'businessCategory'  => 'required',
                 'businessSubcategory' => 'required',
-                'businessDetail'    => 'string',
-                'businessSchedulle' => 'string',
-                'businessMoreInformation' => 'string',
             );
 
             $messages = array(

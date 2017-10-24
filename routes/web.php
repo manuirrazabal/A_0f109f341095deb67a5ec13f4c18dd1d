@@ -31,6 +31,8 @@ Route::post('password', 'ProfileController@password');
 
 //Business..
 Route::get('business', 'BusinessController@index');
+Route::get('business/nuevo', 'BusinessController@add');
+Route::post('business/nuevo', 'BusinessController@add');
 Route::get('business/delete/{id}', 'BusinessController@delete');
 Route::get('business/editar/{id}', 'BusinessController@edit');
 Route::post('business/editar/{id}', 'BusinessController@edit');

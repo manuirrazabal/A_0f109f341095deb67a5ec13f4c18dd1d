@@ -83,7 +83,7 @@ class BusinessImages extends Model
         try {
             $this->create($data);
             $resp['ok'] = true;
-
+            
         } catch (\Exception $e) {
             $resp['ok'] = false;
             $resp['error'] = $e->getMessage();

@@ -99,6 +99,29 @@ class Business extends Model
         return $this->where('business_user_id', $idBusiness)->findOrFail($id);
     }
 
+
+    /**
+     * ADD  a new business
+     *
+     * @param array data
+     * @return object
+     */
+    public function addBusiness($data)
+    {
+        try {
+            $business = $this->create($data);
+
+            $resp['ok'] = true;
+            $resp['id'] = $business->business_id;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        return $resp;
+    }
+
+
     /**
      * Update a business
      *
@@ -146,5 +169,16 @@ class Business extends Model
         }
         
         return $resp;
+    }
+
+     /**
+     * Get the number of  business created from specific user..
+     *
+     * @param integer id
+     * @return object
+     */
+    public function countBusiness($id)
+    {
+        return $this->where('business_user_id', $id)->count();
     }
 }
