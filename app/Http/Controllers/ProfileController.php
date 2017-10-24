@@ -18,6 +18,7 @@ class ProfileController extends Controller
      **/
     public function index(Request $request)
     {
+        //Like always, check the user information, move into a middleware later
         if (!Session::has('userInfo')) {
             return redirect()->to('/login');
         }
