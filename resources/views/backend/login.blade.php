@@ -10,16 +10,7 @@
 				            <h1>Iniciar Sesion</h1>
 				        </div><!-- /.page-title -->
 
-				        @if(!empty($errors->all()))
-				        <div class="alert alert-danger" role="alert">
-		                    <strong>{{  'Error!' }}</strong> 
-		                    <ul>
-					            @foreach($errors->all() as $key=>$error)
-					            <li>{!! $error !!}</li>
-					            @endforeach
-					        </ul>
-		                </div>
-					    @endif
+				       	@include('backend.includes.error-messages')
 
 				        <form method="post" action="?">
 				        	{{ csrf_field() }}

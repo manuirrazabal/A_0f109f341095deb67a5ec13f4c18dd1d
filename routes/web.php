@@ -33,12 +33,17 @@ Route::post('password', 'ProfileController@password');
 Route::get('business', 'BusinessController@index');
 Route::get('business/nuevo', 'BusinessController@add');
 Route::post('business/nuevo', 'BusinessController@add');
+
 Route::get('business/delete/{id}', 'BusinessController@delete');
 Route::get('business/editar/{id}', 'BusinessController@edit');
 Route::post('business/editar/{id}', 'BusinessController@edit');
+
 Route::get('business/imagenes/{id}', 'BusinessController@images');
 Route::post('business/imagenes/{id}', 'BusinessController@images');
 Route::get('business/imagenes/{id}/delete', 'BusinessController@deleteImages');
+
+Route::get('business/inactivate/{id}', 'BusinessController@inactivate');
+Route::get('business/activate/{id}', 'BusinessController@activate');
 
 
 

@@ -53,7 +53,7 @@ class LoginController extends Controller
             }
         }
 
-        return \View::make('user.login');
+        return \View::make('backend.login');
     }
 
     /**
@@ -114,7 +114,7 @@ class LoginController extends Controller
             }
         }
 
-        return \View::make('user.register');
+        return \View::make('backend.register');
     }
 
     /**

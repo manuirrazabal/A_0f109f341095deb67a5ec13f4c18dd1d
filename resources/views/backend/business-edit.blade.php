@@ -37,22 +37,7 @@
 							</div><!-- /.page-title -->
 
 							<div class="background-white p20 mb30">
-								@if(!empty($errors->all()))
-							        <div class="alert alert-danger" role="alert">
-					                    <strong>{{  'Error!' }}</strong> 
-					                    <ul>
-								            @foreach($errors->all() as $key=>$error)
-								            <li>{!! $error !!}</li>
-								            @endforeach
-								        </ul>
-					                </div>
-								@endif
-
-								@if(Session::has('message'))
-									<div class="alert alert-success" role="alert">
-					                    {{ Session::get('message') }}
-					                </div>
-								@endif
+								@include('backend.includes.error-messages')
 
 								@if(isset($businessDetail))
 					                <form method="post" action="?">
