@@ -31,7 +31,8 @@ class BusinessController extends Controller
 
         //List business from user. 
         $bus = new Business;
-        $data['business'] = $bus->getBusiness(json_decode($data['userInfo'])->user_id);
+        $data['businessActive'] = $bus->getBusiness(json_decode($data['userInfo'])->user_id);
+        $data['businessInactive'] = $bus->getBusinessInactives(json_decode($data['userInfo'])->user_id);
         return \View::make('backend.business', $data);
     }
 
@@ -295,6 +296,56 @@ class BusinessController extends Controller
                 return back()->withErrors(["Opps Algo sucedio, que no esperabamos"])->withInput();
             }
 
+        }
+    }
+
+    /**
+     *  INACTIVE business.
+     *
+     **/
+    public function inactivate($id)
+    {
+         //Like always, check the user information, move into a middleware later
+        if (!Session::has('userInfo')) {
+            return redirect()->to('/login');
+        }
+
+        //If doenst exist the id and if null, sent to login page. 
+        if (!isset($id) && empty($id)) {
+            return redirect()->to('/login');
+        }
+
+        $resp = (new Business)->activateBusiness($id, 0);
+
+        if ($resp['ok']) {
+            return redirect()->to('/business')->with('message', 'Anuncio desactivado exitosamente');
+        } else {
+            return back()->withErrors([$resp['error']])->withInput();
+        }
+    }
+
+    /**
+     *  INACTIVE business.
+     *
+     **/
+    public function activate($id)
+    {
+         //Like always, check the user information, move into a middleware later
+        if (!Session::has('userInfo')) {
+            return redirect()->to('/login');
+        }
+
+        //If doenst exist the id and if null, sent to login page. 
+        if (!isset($id) && empty($id)) {
+            return redirect()->to('/login');
+        }
+
+        $resp = (new Business)->activateBusiness($id, 1);
+
+        if ($resp['ok']) {
+            return redirect()->to('/business')->with('message', 'Anuncio activado exitosamente');
+        } else {
+            return back()->withErrors([$resp['error']])->withInput();
         }
     }
 }

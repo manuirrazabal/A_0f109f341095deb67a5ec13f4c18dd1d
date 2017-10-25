@@ -77,15 +77,27 @@ class Business extends Model
     */
 
     /**
-     * Get all business from specific user..
+     * Get all ACTIVES from specific user..
      *
      * @param integer id
      * @return object
      */
     public function getBusiness($id)
     {
-        return $this->where('business_user_id', $id)->get();
+        return $this->where('business_user_id', $id)->where('business_active', 1)->get();
     }
+
+    /**
+     * Get all INACTIVES business from specific user..
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getBusinessInactives($id)
+    {
+        return $this->where('business_user_id', $id)->where('business_active', 0)->get();
+    }
+   
 
     /**
      * Get a specific business from an user..
@@ -180,5 +192,27 @@ class Business extends Model
     public function countBusiness($id)
     {
         return $this->where('business_user_id', $id)->count();
+    }
+
+
+    /**
+     * ACTIVATE/INACTIVATE business from specific user..
+     *
+     * @param integer id
+     * @param integer flag (status)
+     * @return object
+     */
+    public function activateBusiness($id, $flag)
+    {
+        try {
+            $this->where('business_id', $id)->update(['business_active' => $flag]);
+            $resp['ok'] = true;
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+        
+        return $resp;
     }
 }

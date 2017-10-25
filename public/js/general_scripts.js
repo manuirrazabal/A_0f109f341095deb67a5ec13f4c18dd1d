@@ -62,3 +62,17 @@ function deleteImages(id)
         window.location.replace("/business/imagenes/"+id+"/delete");
     } 
 }
+
+function inactivateBusiness(id) 
+{
+    if (confirm('Estas seguro que deseas desactivar este anuncio?')) {
+        window.location.replace("/business/inactivate/"+id);
+    } 
+}
+
+function activateBusiness(id) 
+{
+    if (confirm('Estas seguro que deseas activar este anuncio?')) {
+        window.location.replace("/business/activate/"+id);
+    } 
+}
