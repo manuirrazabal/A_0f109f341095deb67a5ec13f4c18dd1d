@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header-inner">
                 <div class="header-logo">
-                    <a href="index.html">
+                    <a href="{{ url('/') }}">
                         <img src="{{ url('/img/logo.png') }}" alt="Logo">
                         <span>Anuncios</span>
                     </a>
@@ -25,29 +25,14 @@
                             </li>
 
                             <li >
-                                <a href="#">Listing <i class="fa fa-chevron-down"></i></a>
+                                <a href="#">Categorias <i class="fa fa-chevron-down"></i></a>
 
                                 <ul class="sub-menu">
-                                    <li><a href="listing-detail.html">Detail</a></li>
-                                    <li><a href="listing-map.html">Row + Map</a></li>
-                                    <li><a href="listing-grid.html">Grid</a></li>
-                                    <li><a href="listing-grid-sidebar.html">Grid Sidebar</a></li>
-                                    <li><a href="listing-row.html">Row</a></li>
-                                    <li><a href="listing-row-sidebar.html">Row Sidebar</a></li>
-                                </ul>
-                            </li>
-
-                            <li >
-                                <a href="#">Blog <i class="fa fa-chevron-down"></i></a>
-
-                                <ul class="sub-menu">
-                                    <li><a href="blog-standard-right-sidebar.html">Standard Right Sidebar</a></li>
-                                    <li><a href="blog-standard-left-sidebar.html">Standard Left Sidebar</a></li>
-                                    <li><a href="blog-boxed.html">Boxed Style</a></li>
-                                    <li><a href="blog-condensed.html">Condensed Style</a></li>
-                                    <li><a href="blog-detail.html">Detail Fullwidth</a></li>
-                                    <li><a href="blog-detail-right-sidebar.html">Detail Right Sidebar</a></li>
-                                    <li><a href="blog-detail-left-sidebar.html">Detail Left Sidebar</a></li>
+                                    @if(!empty($categories) && count($categories) > 0)
+                                        @foreach($categories as $cat)
+                                            <li><a href="{{ returnFriendlyUrl($cat->cat_description) }}"> {{ $cat->cat_description }}</a></li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </li>
 
