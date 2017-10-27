@@ -16,8 +16,8 @@
 /**
  * Return a Friendly URL, Use it for Menu.
  *
- * @param  string $message
- * @return json
+ * @param  string $text
+ * @return string
  */
 function returnFriendlyUrl($text)
 {
