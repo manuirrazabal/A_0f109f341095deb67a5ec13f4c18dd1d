@@ -81,6 +81,7 @@ $factory->define(
     function (Faker\Generator $faker) {
         return [
         'cat_description'   => isset($cat_description) ?: $cat_description = $faker->sentence,
+        'cat_slug'          => isset($cat_slug) ?: $cat_slug = $faker->slug,
         'cat_order'         => isset($cat_order) ?: $cat_order = $faker->randomDigitNotNull,
         'cat_active'        => isset($cat_active) ?: $cat_active = 1,
         ];
@@ -94,6 +95,7 @@ $factory->define(
         return [
         'scat_cat_id'           => isset($scat_cat_id) ?: $scat_cat_id = $faker->randomDigitNotNull,
         'scat_description'      => isset($scat_description) ?: $scat_description = $faker->sentence,
+        'scat_slug'             => isset($scat_slug) ?: $scat_slug = $faker->slug,
         'scat_order'            => isset($scat_order) ?: $scat_order = $faker->randomDigitNotNull,
         'scat_active'           => isset($scat_active) ?: $scat_active = 1,
         ];
@@ -114,6 +116,7 @@ $factory->define(
         'business_mail'     => isset($business_mail) ?: $business_mail = $faker->companyEmail,
         'business_postalcode' => isset($business_postalcode) ?: $business_postalcode = $faker->postcode,
         'business_cat_id'   => App\Models\Subcategory::inRandomOrder()->first()->scat_id,
+        'business_slug'     => isset($business_slug) ?: $business_slug = $faker->slug,
         'bdetail_schedulle' => isset($bdetail_schedulle) ?: $bdetail_schedulle = $faker->sentence,
         'bdetail_detail'    => isset($bdetail_detail) ?: $bdetail_detail = $faker->paragraph,
         'bdetail_more_info' => isset($bdetail_more_info) ?: $bdetail_more_info = $faker->text,
