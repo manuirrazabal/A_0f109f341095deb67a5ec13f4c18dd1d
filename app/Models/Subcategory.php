@@ -78,4 +78,15 @@ class Subcategory extends Model
     {
         return $this->where('scat_cat_id', $id)->orderBy('scat_order')->get();
     }
+
+    /**
+     * Get SubCategory information by their sulg
+     *
+     * @param String $slug
+     * @return Array
+     */
+    public function getSubcategoryInformationBySlug($slug)
+    {
+        return $this->where('scat_slug', $slug)->with('category')->first();
+    }
 }
