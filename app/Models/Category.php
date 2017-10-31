@@ -34,6 +34,7 @@ class Category extends Model
      */
     protected $fillable = [
         'cat_description',
+        'cat_slug',
         'cat_order',
         'cat_active',
     ];

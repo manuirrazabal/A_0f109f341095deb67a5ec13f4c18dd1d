@@ -35,6 +35,7 @@ class Subcategory extends Model
     protected $fillable = [
         'scat_cat_id',
         'scat_description',
+        'scat_slug',
         'scat_order',
         'scat_active',
     ];

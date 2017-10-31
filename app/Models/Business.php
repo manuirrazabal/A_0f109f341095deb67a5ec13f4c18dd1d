@@ -49,6 +49,7 @@ class Business extends Model
         'business_mail',
         'business_postalcode',
         'business_cat_id',
+        'business_slug',
         'bdetail_schedulle',
         'bdetail_detail',
         'bdetail_more_info',
