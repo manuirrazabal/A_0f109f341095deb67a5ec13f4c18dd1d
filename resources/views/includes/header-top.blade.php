@@ -30,7 +30,7 @@
                                 <ul class="sub-menu">
                                     @if(!empty($categories) && count($categories) > 0)
                                         @foreach($categories as $cat)
-                                            <li><a href="c/{{ $cat->cat_slug }}"> {{ $cat->cat_description }}</a></li>
+                                            <li><a href="{{ url('c/'.$cat->cat_slug) }}"> {{ $cat->cat_description }}</a></li>
                                         @endforeach
                                     @endif
                                 </ul>
