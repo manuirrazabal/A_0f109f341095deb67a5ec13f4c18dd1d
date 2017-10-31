@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+
 
 class Business extends Model
 {
@@ -215,4 +217,27 @@ class Business extends Model
         
         return $resp;
     }
+
+     /**
+     * Get the last business by category. Max 10.
+     *
+     * @param integer id
+     * @return object
+     */
+    public function lastCreatedByCategory($cat)
+    {
+        return  DB::table('an_business')
+                ->leftJoin('an_subcategories', 'an_business.business_cat_id', '=', 'an_subcategories.scat_id')
+                ->leftJoin('an_categories',    'an_categories.cat_id', '=', 'an_subcategories.scat_cat_id')
+                ->leftJoin('an_business_images',  'an_business.business_id', '=', 'an_business_images.bimages_business_id')
+                ->leftJoin('an_cities',    'an_business.business_city', '=', 'an_cities.id')
+                ->where('an_subcategories.scat_cat_id', $cat)
+                ->where('an_business.business_active', 1)
+                ->orderBy('an_business.created_at', 'DESC')
+                ->limit(10)
+                ->get();
+
+
+    }
+
 }

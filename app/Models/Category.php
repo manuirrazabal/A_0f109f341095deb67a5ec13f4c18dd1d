@@ -59,4 +59,10 @@ class Category extends Model
     {
         return $this->where('cat_active', 1)->with('subcategories')->get();
     }
+
+
+     public function getCategoriesById($slug)
+    {
+        return $this->where('cat_slug', $slug)->with('subcategories')->first();
+    }
 }
