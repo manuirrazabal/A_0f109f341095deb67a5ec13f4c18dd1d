@@ -43,13 +43,13 @@
 							            	@endif
 
 							                <div class="card-row-body">
-							                    <h2 class="card-row-title"><a href="listing-detail.html">{{ $lastest->business_name }}</a></h2>
+							                    <h2 class="card-row-title"><a href="{{ url('b/'.$lastest->business_slug) }}">{{ $lastest->business_name }}</a></h2>
 							                    <div class="card-row-content"><p>{{ $lastest->bdetail_detail }}</p></div><!-- /.card-row-content -->
 							                </div><!-- /.card-row-body -->
 
 							                <div class="card-row-properties">
 							                    <dl>
-						                            <dd>Categoria</dd><dt>{{ $lastest->cat_description }}</dt>							    
+						                            <dd>Categoria</dd><dt>{{ $lastest->cat_description }}</dt>			    
 						                            <dd>Subcategoria</dd><dt>{{ $lastest->scat_description }}</dt>
 						                            <dd>Ubicacion</dd><dt>{{ $lastest->city_name }}</dt>
 							                        <dd>Telefono</dd><dt> {{ $lastest->business_phone }}</dt>
