@@ -44,7 +44,7 @@
 
 							                <div class="card-row-body">
 							                    <h2 class="card-row-title"><a href="{{ url('b/'.$lastest->business_slug) }}">{{ $lastest->business_name }}</a></h2>
-							                    <div class="card-row-content"><p>{{ $lastest->bdetail_detail }}</p></div><!-- /.card-row-content -->
+							                    <div class="card-row-content"><p>{{ substr($lastest->bdetail_detail, 0, 150) }}{{ strlen($lastest->bdetail_detail) > 150 ? "..." : "" }}</p></div><!-- /.card-row-content -->
 							                </div><!-- /.card-row-body -->
 
 							                <div class="card-row-properties">
@@ -61,7 +61,7 @@
 				    		@endif
 			    		</div>
 			    	</div>
-			    </div>
+			    </div><!-- /.row -->
 			</div><!-- /.content -->
         </div><!-- /.container -->
     </div><!-- /.main-inner -->

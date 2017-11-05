@@ -60,6 +60,8 @@ class CategoriesController extends Controller
         //Get Category and Subcategory Information. 
         $data['subcategory'] = (new Subcategory)->getSubcategoryInformationBySlug($subcategory);
 
+        //Return all products of subcategory. 
+        $data['businessSubcategoty'] = (new Business)->getBusinessBySubcat($data['subcategory']->scat_id);
     	return \View::make('frontend.subcategories', $data);
     }
 }
