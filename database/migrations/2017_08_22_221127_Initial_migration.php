@@ -70,6 +70,7 @@ class InitialMigration extends Migration
             function (Blueprint $table) {
                 $table->increments('bimages_id');
                 $table->integer('bimages_business_id');
+                $table->boolean('bimages_principal')->default(0);
                 $table->string('bimages_route', 255);
                 $table->timestamps();
                 $table->softDeletes();

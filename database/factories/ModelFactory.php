@@ -131,6 +131,7 @@ $factory->define(
         return [
         'bimages_business_id'  => App\Models\Business::inRandomOrder()->first()->business_id,
         'bimages_route'         => isset($bimages_route) ?: $bimages_route = $faker->imageUrl,
+        'bimages_principal'     => isset($bimages_principal) ?: $bimages_principal = 0,
         ];
     }
 );
