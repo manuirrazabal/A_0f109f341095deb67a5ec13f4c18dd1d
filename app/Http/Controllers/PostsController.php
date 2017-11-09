@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use Session;
@@ -15,11 +16,11 @@ class PostsController extends Controller
     	$cat = (new Category)->getCategoriesAll();
     	Session::put('categories', $cat);
 
-
     }
 
     public function index($slug)
     {
+    	// Same shit.
     	if(!isset($slug)) {
     		 return abort(404);
     	}
@@ -33,6 +34,7 @@ class PostsController extends Controller
         }
 
         $data['business'] = (new Business)->getBusinessbySlug($slug);
+        $data['categoryFather'] = (new Subcategory)->getCategorybySubcategory($data['business']->business_cat_id);
     	
     	return \View::make('frontend.business', $data);
     }

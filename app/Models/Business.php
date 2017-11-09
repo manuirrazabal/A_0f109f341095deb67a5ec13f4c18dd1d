@@ -64,11 +64,25 @@ class Business extends Model
     |------------------------------------------------
     */
 
+    // Business Images Relation
     public function businessImages()
     {
         return $this->hasMany('App\Models\BusinessImages', 'bimages_business_id', 'business_id');
     }
 
+    // Subcategories Relations.
+    public function subcategory()
+    {
+        return $this->hasMany('App\Models\Subcategory', 'scat_id', 'business_cat_id');
+    }
+
+    // City Relations.
+    public function city()
+    {
+        return $this->hasMany('App\Models\Cities', 'id', 'business_city');
+    }
+
+    // Users Relations
     public function users()
     {
         return $this->belongsTo('App\Models\Users', 'business_user_id', 'user_id');
@@ -298,7 +312,10 @@ class Business extends Model
      */
     public function getBusinessbySlug($slug)
     {
-        return $this->where('business_slug', $slug)->where('business_active', 1)->with('businessImages')->first();
+        return $this->where('business_slug', $slug)
+                ->where('business_active', 1)
+                ->with(['businessImages', 'subcategory', 'city'])
+                ->first();
     }
 
 }
