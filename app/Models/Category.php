@@ -34,6 +34,7 @@ class Category extends Model
      */
     protected $fillable = [
         'cat_description',
+        'cat_slug',
         'cat_order',
         'cat_active',
     ];
@@ -58,5 +59,11 @@ class Category extends Model
     public function getCategoriesAll()
     {
         return $this->where('cat_active', 1)->with('subcategories')->get();
+    }
+
+
+     public function getCategoriesById($slug)
+    {
+        return $this->where('cat_slug', $slug)->with('subcategories')->first();
     }
 }

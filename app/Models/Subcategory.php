@@ -35,6 +35,7 @@ class Subcategory extends Model
     protected $fillable = [
         'scat_cat_id',
         'scat_description',
+        'scat_slug',
         'scat_order',
         'scat_active',
     ];
@@ -48,6 +49,11 @@ class Subcategory extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category', 'scat_cat_id', 'cat_id');
+    }
+
+    public function business()
+    {
+        return $this->belongsTo('App\Models\Business', 'scat_cat_id', 'business_cat_id');
     }
 
     /*
@@ -76,5 +82,28 @@ class Subcategory extends Model
     public function getSubcatoryById($id)
     {
         return $this->where('scat_cat_id', $id)->orderBy('scat_order')->get();
+    }
+
+    /**
+     * Get SubCategory information by their sulg
+     *
+     * @param String $slug
+     * @return Array
+     */
+    public function getSubcategoryInformationBySlug($slug)
+    {
+        return $this->where('scat_slug', $slug)->with('category')->first();
+    }
+
+
+    /**
+     * Get Category information by their subcategory.
+     *
+     * @param Integer $slug
+     * @return Array
+     */
+    public function getCategorybySubcategory($id)
+    {
+        return $this->where('scat_id', $id)->with('category')->first();
     }
 }

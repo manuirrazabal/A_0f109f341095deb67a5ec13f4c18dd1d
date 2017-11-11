@@ -23,6 +23,8 @@ Route::post('login', 'LoginController@login');
 Route::get('register', 'LoginController@register');
 Route::post('register', 'LoginController@register');
 
+//WITH LOGIN BACKEND
+
 Route::get('logout', 'LoginController@logout');
 Route::get('profile', 'ProfileController@index');
 Route::post('profile', 'ProfileController@index');
@@ -46,6 +48,20 @@ Route::get('business/inactivate/{id}', 'BusinessController@inactivate');
 Route::get('business/activate/{id}', 'BusinessController@activate');
 
 
+/**
+ * WITHOUT LOGIN, FRONT END. 
+ *
+ **/
+
+//GET CATEGORIES 
+Route::get('c/{slug}', ['as' => 'categories.single', 'uses' => 'CategoriesController@index'])->where('slug', '[\w\d\-\_]+');
+
+//GET Subcategories
+Route::get('c/{slug}/{subcategory}', ['as' => 'subcategories.single', 'uses' => 'CategoriesController@subcategories'])->where('slug', '[\w\d\-\_]+')->where('subcategory', '[\w\d\-\_]+');
+
+//GET POST
+Route::get('b/{slug}', ['as' => 'business.single', 'uses' => 'PostsController@index'])->where('slug', '[\w\d\-\_]+');
+Route::post('b/{slug}', ['as' => 'business.single', 'uses' => 'PostsController@index'])->where('slug', '[\w\d\-\_]+');
 
 //Protected Routes 
 Route::get('ajax/state/{id}', 'AjaxController@states');

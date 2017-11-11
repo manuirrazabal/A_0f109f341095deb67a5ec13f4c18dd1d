@@ -12,6 +12,16 @@
  */
 
 
+/**
+ * Return a Friendly DATE, Use it for Views
+ *
+ * @param  DateTmime $value
+ * @return string
+ */
+function returnFriendlyDate($value) {
+    return \Carbon\Carbon::parse($value)->format('d-m-Y');
+}
+
 
 /**
  * Return a Friendly URL, Use it for Menu.

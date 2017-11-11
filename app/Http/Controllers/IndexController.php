@@ -21,6 +21,7 @@ class IndexController extends Controller
 
         if (Session::has('categories')) {
             $data['categories'] = Session::get('categories');
+            
         }
 
         if (Session::has('userInfo')) {

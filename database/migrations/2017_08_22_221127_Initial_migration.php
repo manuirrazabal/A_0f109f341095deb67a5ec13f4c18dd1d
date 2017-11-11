@@ -46,14 +46,15 @@ class InitialMigration extends Migration
             'an_business',
             function (Blueprint $table) {
                 $table->increments('business_id');
-                $table->uuid('business_user_id');
-                $table->string('business_name', 128);
+                $table->integer('business_user_id');
+                $table->string('business_name', 255);
                 $table->string('business_address');
                 $table->integer('business_city');
                 $table->string('business_phone');
                 $table->string('business_mail')->nullable();
                 $table->string('business_postalcode')->nullable();
                 $table->integer('business_cat_id');
+                $table->string('business_slug')->unique();
                 $table->text('bdetail_schedulle')->nullable();
                 $table->text('bdetail_detail')->nullable();
                 $table->text('bdetail_more_info')->nullable();
@@ -69,6 +70,7 @@ class InitialMigration extends Migration
             function (Blueprint $table) {
                 $table->increments('bimages_id');
                 $table->integer('bimages_business_id');
+                $table->boolean('bimages_principal')->default(0);
                 $table->string('bimages_route', 255);
                 $table->timestamps();
                 $table->softDeletes();
@@ -120,6 +122,7 @@ class InitialMigration extends Migration
             function (Blueprint $table) {
                 $table->increments('cat_id');
                 $table->string('cat_description');
+                $table->string('cat_slug')->unique();
                 $table->integer('cat_order');
                 $table->boolean('cat_active')->default(1);
                 $table->timestamps();
@@ -133,6 +136,7 @@ class InitialMigration extends Migration
                 $table->increments('scat_id');
                 $table->integer('scat_cat_id');
                 $table->string('scat_description');
+                $table->string('scat_slug')->unique();
                 $table->integer('scat_order');
                 $table->boolean('scat_active')->default(1);
                 $table->timestamps();

@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\BusinessImages;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+
 
 class Business extends Model
 {
@@ -47,6 +50,7 @@ class Business extends Model
         'business_mail',
         'business_postalcode',
         'business_cat_id',
+        'business_slug',
         'bdetail_schedulle',
         'bdetail_detail',
         'bdetail_more_info',
@@ -60,11 +64,25 @@ class Business extends Model
     |------------------------------------------------
     */
 
+    // Business Images Relation
     public function businessImages()
     {
         return $this->hasMany('App\Models\BusinessImages', 'bimages_business_id', 'business_id');
     }
 
+    // Subcategories Relations.
+    public function subcategory()
+    {
+        return $this->hasMany('App\Models\Subcategory', 'scat_id', 'business_cat_id');
+    }
+
+    // City Relations.
+    public function city()
+    {
+        return $this->hasMany('App\Models\Cities', 'id', 'business_city');
+    }
+
+    // Users Relations
     public function users()
     {
         return $this->belongsTo('App\Models\Users', 'business_user_id', 'user_id');
@@ -215,4 +233,89 @@ class Business extends Model
         
         return $resp;
     }
+
+     /**
+     * Get the last business by category. Max 10.
+     *
+     * @param integer id
+     * @return object
+     */
+    public function lastCreatedByCategory($cat)
+    {
+        try {
+            $resp = DB::table('an_business')
+                ->join('an_subcategories', 'an_business.business_cat_id', '=', 'an_subcategories.scat_id')
+                ->join('an_categories',    'an_categories.cat_id', '=', 'an_subcategories.scat_cat_id')
+                ->join('an_cities',  'an_cities.id', '=', 'an_business.business_city')
+                ->where('an_business.business_active', 1)
+                ->where('an_subcategories.scat_cat_id', $cat)
+                ->latest('an_business.created_at')
+                ->limit(10)
+                ->get();
+
+            // Adding Images
+            foreach ($resp as $key => $value) {
+                $image = BusinessImages::where('bimages_business_id', $value->business_id)->first();
+                if ($image) {
+                    $value->bimage_id       = $image->bimages_id;
+                    $value->bimages_route   = $image->bimages_route;
+                }
+            }
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+
+        return  $resp;
+    }
+
+
+     /**
+     * Get All bussines from subcategory
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getBusinessBySubcat($cat)
+    {
+        try {
+            $resp = DB::table('an_business')
+                ->join('an_cities',  'an_cities.id', '=', 'an_business.business_city')
+                ->where('an_business.business_active', 1)
+                ->where('an_business.business_cat_id', $cat)
+                ->latest('an_business.created_at')
+                ->get();
+
+            // Adding Images
+            foreach ($resp as $key => $value) {
+                $image = BusinessImages::where('bimages_business_id', $value->business_id)->first();
+                if ($image) {
+                    $value->bimage_id       = $image->bimages_id;
+                    $value->bimages_route   = $image->bimages_route;
+                }
+            }
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+
+        return  $resp;
+    }
+
+    /**
+     * Get a business by slug
+     *
+     * @param integer id
+     * @return object
+     */
+    public function getBusinessbySlug($slug)
+    {
+        return $this->where('business_slug', $slug)
+                ->where('business_active', 1)
+                ->with(['businessImages', 'subcategory', 'city'])
+                ->first();
+    }
+
 }

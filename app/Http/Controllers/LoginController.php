@@ -71,7 +71,7 @@ class LoginController extends Controller
             $rules = array(
                 'first_name' => 'required',
                 'last_name' => 'required',
-                'email'     => 'required|email',
+                'email'     => 'required|email|unique:an_users,user_email',
                 'password'  => 'required|min:6',
                 'password2' => 'required|same:password',
             );
