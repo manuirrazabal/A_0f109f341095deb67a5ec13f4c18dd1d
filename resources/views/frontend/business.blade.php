@@ -64,30 +64,32 @@
 					        </div><!-- /.detail-gallery -->
 				        @endif
 
-				        <h2>Enquire Form</h2>
+				        <h2>Contacto</h2>
+				        <div class="detail-enquire-form background-white p20">
+				        	@include('backend.includes.error-messages')
 
-					        <div class="detail-enquire-form background-white p20">
-					            <form method="post" action="?">
-					                <div class="form-group">
-					                    <label for="">Name</label>
-					                    <input type="text" class="form-control" name="" id="">
-					                </div><!-- /.form-group -->
+				            <form method="post" action="?">
+				            	{{ csrf_field() }}
+				                <div class="form-group">
+				                    <label for="">Nombre</label>
+				                    <input type="text" class="form-control" name="contactName" id="contactName" required>
+				                </div><!-- /.form-group -->
 
-					                <div class="form-group">
-					                    <label for="">Email <span class="required">*</span></label>
-					                    <input type="email" class="form-control" name="" id="" required>
-					                </div><!-- /.form-group -->
+				                <div class="form-group">
+				                    <label for="">Email <span class="required">*</span></label>
+				                    <input type="email" class="form-control" name="contactEmail" id="contactEmail" required>
+				                </div><!-- /.form-group -->
 
-					                <div class="form-group">
-					                    <label for="">Message <span class="required">*</span></label>
-					                    <textarea class="form-control" name="" id="" rows="5" required></textarea>
-					                </div><!-- /.form-group -->
+				                <div class="form-group">
+				                    <label for="">Mensaje <span class="required">*</span></label>
+				                    <textarea class="form-control" name="contactMessage" id="contactMessage" rows="5" required></textarea>
+				                </div><!-- /.form-group -->
 
-					                <p>Required fields are marked <span class="required">*</span></p>
+				                <p>Campos requeridos <span class="required">*</span></p>
 
-					                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-paper-plane"></i>Send Message</button>
-					            </form>
-					        </div><!-- /.detail-enquire-form -->
+				                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-paper-plane"></i>Enviar Mensaje</button>
+				            </form>
+				        </div><!-- /.detail-enquire-form -->
   				  	</div><!-- /.col-sm-7 -->
   					
 
@@ -96,38 +98,49 @@
 			        <div class="background-white p20">
 			            <div class="detail-vcard">
 			                <div class="detail-contact">
-			                    <div class="detail-contact-email">
-			                        <i class="fa fa-envelope-o"></i> <a href="mailto:#">{{ $business->business_mail }}</a>
-			                    </div>
+			                    @if(!empty($business->business_mail) && isset($business->business_mail))
+				                    <div class="detail-contact-email">
+				                        <i class="fa fa-envelope-o"></i> <a href="mailto:#">{{ $business->business_mail }}</a>
+				                    </div>
+				                @endif
+				                @if(!empty($business->business_phone) && isset($business->business_phone))
 			                    <div class="detail-contact-phone">
 			                        <i class="fa fa-mobile-phone"></i> <a href="tel:#">{{ $business->business_phone }}</a>
 			                    </div>
+			                    @endif
+			                    @if(!empty($business->business_postalcode) && isset($business->business_postalcode))
 			                    <div class="detail-contact-website">
 			                        <i class="fa fa-globe"></i> <a href="#">{{ $business->business_postalcode }}</a>
 			                    </div>
+			                    @endif
+			                    @if(!empty($business->business_address) && isset($business->business_address))
 			                    <div class="detail-contact-address">
 			                        <i class="fa fa-map-o"></i>
 			                        {{ $business->business_address }}
 			                        <br>
 			                        {{ $business->city->first->city_name->city_name }}
 			                    </div>
+			                    @endif
 			                </div><!-- /.detail-contact -->
 			            </div><!-- /.detail-vcard -->
 
+			            @if(!empty($business->bdetail_detail) && isset($business->bdetail_detail))
 			            <div class="detail-description">
 			                <p>{{ $business->bdetail_detail }}</p>
 			                <p></p>
-			                <p></p>
 			            </div>
+			            @endif
 			        </div>
 
-			        <h2>M&aacute;s Informaci&oacute;n</h2>
+			        @if(!empty($business->bdetail_more_info) && isset($business->bdetail_more_info))
+				        <h2>M&aacute;s Informaci&oacute;n</h2>
 
-			        <div class="detail-enquire-form background-white p20">
-			            <p>{{ $business->bdetail_more_info }}</p>
-			        </div><!-- /.detail-enquire-form -->
+				        <div class="detail-enquire-form background-white p20">
+				            <p>{{ $business->bdetail_more_info }}</p>
+				        </div><!-- /.detail-enquire-form -->
+			        @endif
 
-
+			        <!-- 
 			        <div class="detail-payments">
 			            <h3>Accepted Payments</h3>
 			            
@@ -139,6 +152,7 @@
 			                <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
 			    		</ul>
 			        </div>
+			        -->
 			    </div><!-- /.col-sm-5 -->
 			</div><!-- /.row -->
 

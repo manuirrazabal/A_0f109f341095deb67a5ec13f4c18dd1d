@@ -61,6 +61,7 @@ Route::get('c/{slug}/{subcategory}', ['as' => 'subcategories.single', 'uses' => 
 
 //GET POST
 Route::get('b/{slug}', ['as' => 'business.single', 'uses' => 'PostsController@index'])->where('slug', '[\w\d\-\_]+');
+Route::post('b/{slug}', ['as' => 'business.single', 'uses' => 'PostsController@index'])->where('slug', '[\w\d\-\_]+');
 
 //Protected Routes 
 Route::get('ajax/state/{id}', 'AjaxController@states');
