@@ -38,15 +38,14 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-bottom-left">
-                &copy; 2015 All rights reserved. Created by <a href="#">Aviators</a>.
+                &copy; 2018 Todos los derechos reservados. Creado por <a href="#">Manuirrazabal</a>.
             </div><!-- /.footer-bottom-left -->
 
             <div class="footer-bottom-right">
                 <ul class="nav nav-pills">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
+                    <li><a href="{{ url('/') }}">Inicio</a></li>
+                    <li><a href="{{ url('/') }}">Terminos &amp; Condiciones</a></li>
+                    <li><a href="{{ url('/') }}">Contacto</a></li>
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
         </div><!-- /.container -->
