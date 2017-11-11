@@ -86,23 +86,8 @@ class PostsController extends Controller
 	        if ((new MailServicesHelper)->sendMail($mailArray)) {
 	        	return redirect()->to('/b/'.$slug)->with('message', 'Formulario enviado exitosamente.');
 	        }
-            // $user = new Users;
-            // $resp = $user->updateUser($arr, json_decode($data['userInfo'])->user_id);
-
-            // if ($resp['ok']) {
-            // 	// For Now Update the session here and later update.
-            // 	$newUserData = $user->getUserId(json_decode($data['userInfo'])->user_id);
-            // 	Session::forget('userInfo');
-            // 	Session::put('userInfo', json_encode($newUserData));
-
-            //     return redirect()->to('/profile')->with('message', 'Datos Actualizados Exitosamente');
-            // } else {
-            //     return back()->withErrors([$resp['error']])->withInput();
-            // }
         }
 
-        
-    	
     	return \View::make('frontend.business', $data);
     }
 }

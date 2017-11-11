@@ -270,6 +270,41 @@ class Business extends Model
         return  $resp;
     }
 
+    /**
+     * Get the last business by category. Max 10.
+     *
+     * @param integer id
+     * @return object
+     */
+    public function lastCreatedBusiness()
+    {
+        try {
+            $resp = DB::table('an_business')
+                ->join('an_subcategories', 'an_business.business_cat_id', '=', 'an_subcategories.scat_id')
+                ->join('an_categories',    'an_categories.cat_id', '=', 'an_subcategories.scat_cat_id')
+                ->join('an_cities',  'an_cities.id', '=', 'an_business.business_city')
+                ->where('an_business.business_active', 1)
+                ->latest('an_business.created_at')
+                ->limit(12)
+                ->get();
+
+            // Adding Images
+            foreach ($resp as $key => $value) {
+                $image = BusinessImages::where('bimages_business_id', $value->business_id)->first();
+                if ($image) {
+                    $value->bimage_id       = $image->bimages_id;
+                    $value->bimages_route   = $image->bimages_route;
+                }
+            }
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+
+        return  $resp;
+    }
+
 
      /**
      * Get All bussines from subcategory

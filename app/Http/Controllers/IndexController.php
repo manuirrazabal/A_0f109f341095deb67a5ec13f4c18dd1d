@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
@@ -21,13 +22,14 @@ class IndexController extends Controller
 
         if (Session::has('categories')) {
             $data['categories'] = Session::get('categories');
-            
         }
 
         if (Session::has('userInfo')) {
             $data['userInfo'] = Session::get('userInfo');
         }
 
+        $data['lastBusiness'] = (new Business)->lastCreatedBusiness();
+        //dd($data['lastBusiness'] );
         return \View::make('container', $data);
     }
 }
