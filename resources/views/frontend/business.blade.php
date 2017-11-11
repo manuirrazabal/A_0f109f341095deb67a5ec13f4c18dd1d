@@ -22,10 +22,10 @@
                             <div class="detail-banner-address">
                                 <i class="fa fa-map-o"></i> {{ $business->business_address }}, {{ $business->city->first->city_name->city_name }}
                             </div><!-- /.detail-banner-address -->
-
+							<!--
                             <div class="detail-banner-btn bookmark">
                                 <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Contacto</span>
-                            </div><!-- /.detail-claim -->
+                            </div> /.detail-claim -->
 
                         </div><!-- /.detail-banner-left -->
                     </div><!-- /.container -->
@@ -54,9 +54,13 @@
 					            	@foreach($business->businessImages as $image)
 						                <li class="detail-gallery-list-item active">
 						                    @if(substr($image->bimages_route, 0, 4) == "http")
-							            		<img src="{{ $image->bimages_route }}" alt="" />
+						                    	<a data-target="{{ $image->bimages_route }}">
+							            			<img src="{{ $image->bimages_route }}" alt="..." />
+							            		</a>
 							            	@else
-							            		<img src="{{ url('storage/'.$image->bimages_route) }}" alt="" />
+							            		<a data-target="{{ url('storage/'.$image->bimages_route) }}">
+							            			<img src="{{ url('storage/'.$image->bimages_route) }}" alt="..." />
+							            		</a>
 							            	@endif
 						                </li>
 					                @endforeach
