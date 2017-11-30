@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MailServicesHelper;
 use App\Models\Business;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Session;
 
 class IndexController extends Controller
@@ -76,9 +78,11 @@ class IndexController extends Controller
             );
 
             $content = array(
-                'nombre'    => $request->input('contactName'),
+                'title'    => 'Haz recibido un nuevo correo de contacto desde el formulario principal',
+                'subtitle'  => 'Un usuario a completado el formulario de contacto para que te puedas comunicar con el',
+                'nombre'   => $request->input('contactName'),
                 'email'    => $request->input('contactEmail'),
-                'message'  => $request->input('contactMessage'),
+                'mensaje'  => $request->input('contactMessage'),
             );
             
             $mailArray = array(
@@ -90,7 +94,7 @@ class IndexController extends Controller
                 );
 
             if ((new MailServicesHelper)->sendMail($mailArray)) {
-                return redirect()->to('/b/'.$slug)->with('message', 'Formulario enviado exitosamente.');
+                return redirect()->to('/contacto')->with('message', 'Formulario enviado exitosamente.');
             }
         }
 

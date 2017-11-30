@@ -55,6 +55,8 @@ Route::get('business/activate/{id}', 'BusinessController@activate');
 
 // GET GENERAL INFORMATION ON FRONTEND
 Route::get('contacto', 'IndexController@contact'); 
+Route::post('contacto', 'IndexController@contact'); 
+
 
 
 //GET CATEGORIES 

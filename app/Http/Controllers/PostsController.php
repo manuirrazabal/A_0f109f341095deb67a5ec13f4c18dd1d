@@ -72,15 +72,16 @@ class PostsController extends Controller
             );
 
             $content = array(
-            'title'     => 'Withdrawal confirmation',
-            'subtitle'  => "Your withdrawal was completed successfully",
+                'nombre'    => $request->input('contactName'),
+                'email'     => $request->input('contactEmail'),
+                'mensaje'   => $request->input('contactMessage'),
             );
             
 	        $mailArray = array(
 	            'to'        => $data['business']->business_mail,
 	            'subject'   => '[Anuncios] - Contacto desde usuario',
 	            'content'   => $content,
-	            'template'  => 'emails.notifications'
+	            'template'  => 'emails.contact'
 	            );
 
 	        if ((new MailServicesHelper)->sendMail($mailArray)) {
