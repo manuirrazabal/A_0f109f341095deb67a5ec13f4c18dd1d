@@ -10,6 +10,7 @@
 
 				<div class="row">
 				    <div class="col-sm-6">
+				    	@include('backend.includes.error-messages')
 				        <div class="contact-form-wrapper clearfix">
 				            <form class="contact-form" method="post" action="?">
 				            	{{ csrf_field() }}

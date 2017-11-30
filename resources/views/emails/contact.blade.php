@@ -160,7 +160,3 @@
     </table>
   </body>
 </html>
-
-@php
-dd()
-@endphp 
