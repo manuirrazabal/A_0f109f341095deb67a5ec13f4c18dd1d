@@ -66,7 +66,7 @@
     
 @include('frontend.recent-products')
 
-<div class="block background-secondary fullwidth mt80 mb-80 pt60 pb60">
+<div class="block background-secondary fullwidth mt80">
     <div class="row">
         <div class="col-sm-12">
             <div class="contact-info-wrapper">
@@ -89,8 +89,6 @@
     </div><!-- /.row -->
 </div>
 
-@include('includes.categories')
-
 <div class="block background-black-light fullwidth">
     <div class="row">
         <div class="col-sm-4">
@@ -100,10 +98,8 @@
                 </div><!-- /.box-icon -->
 
                 <div class="box-content">
-                    <h2>E-mail Support</h2>
-                    <p>We are always here to answer all your questions. Feel free to contact us.</p>
-
-                    <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+                    <h2>Soporte por E-mail</h2>
+                    <p>Siempre estaremos aqui para responder todas tus proguntas. Sientete libre de contactarnos.</p>
                 </div><!-- /.box-content -->
             </div>
         </div><!-- /.col-sm-4 -->
@@ -115,10 +111,8 @@
                 </div><!-- /.box-icon -->
 
                 <div class="box-content">
-                    <h2>Always Improving</h2>
-                    <p>Our dedicated team of developers are implementing awesome features.</p>
-
-                    <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+                    <h2>Siempre Mejorando</h2>
+                    <p>Nuestro grupo de desarrolladores siempre esta dedicado a implementar nuevas funcionalidades.</p>
                 </div><!-- /.box-content -->
             </div>
         </div><!-- /.col-sm-4 -->
@@ -130,16 +124,18 @@
                 </div><!-- /.box-icon -->
 
                 <div class="box-content">
-                    <h2>Best Quality</h2>
-                    <p>We list only verifiend places and events to provide best content.</p>
-
-                    <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+                    <h2>Mejor Calidad</h2>
+                    <p>para tu mayor seguridad revisamos todas las publicaciones, en el caso de que sea falsa, la revisaremos inmediatamente.</p>
                 </div><!-- /.box-content -->
             </div>
         </div><!-- /.col-sm-4 -->
     </div><!-- /.row -->
-</div><!-- /.block -->    
+</div><!-- /.block -->
+
+@include('includes.categories')
+
 </div><!-- /.container -->
+
 
             </div><!-- /.content -->
         </div><!-- /.main-inner -->

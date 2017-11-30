@@ -1,5 +1,5 @@
 
-<div class="block background-white fullwidth mt80">
+<div class="block background-white fullwidth">
     <div class="categories">
     @if(isset($categories))
         <ul>
