@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>{{ $subtitle or 'Welcome to DigitalTown'}}</title> 
+<title>{{ $subtitle or 'Anuncios'}}</title> 
 <style>
     @font-face {
     font-family: 'Century Gothic';
@@ -40,7 +40,7 @@
                     <th style="line-height:17px; height:17px;">&nbsp;</th>
                 </tr>
                 <tr>
-                    <th><a href="https://digitaltown.com/"><img src="https://s3-us-west-2.amazonaws.com/dt-media-assets/email_templates/logo.png" alt="" title="" ></a></th>
+                    <th><a href="url('/')"><img src="{{ url('/img/logo.png') }}" alt="Logo"></a></th>
                 </tr>
                 <tr>
                     <th style="line-height:8px; height:8px;">&nbsp;</th>
@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="background:url(https://s3-us-west-2.amazonaws.com/dt-media-assets/email_templates/banner.jpg);background-repeat:no-repeat; text-align:center;">
+                    <td>
                          <h1 style="font-size:30px; color:#ffffff; margin:49px 0 14px 0; padding:0px; text-transform:uppercase; font-weight:400;font-family: 'Century Gothic'; 
                          font-weight:bold; letter-spacing:2px;">{{ $title or 'CONGRATULATIONS'}}</h1>
                          <span><img src="https://s3-us-west-2.amazonaws.com/dt-media-assets/email_templates/seprator.png" alt="" title="" ></span>
