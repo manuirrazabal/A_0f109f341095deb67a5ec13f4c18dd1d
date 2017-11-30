@@ -37,7 +37,7 @@
                             </li>
 
                             <li>
-                                <a href="#">Contactenos <i class="fa"></i></a>
+                                <a href="{{ url('/contacto') }}">Contactenos <i class="fa"></i></a>
                             </li>
                             
                             @if(!isset($userInfo))

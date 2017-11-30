@@ -45,7 +45,7 @@
                 <ul class="nav nav-pills">
                     <li><a href="{{ url('/') }}">Inicio</a></li>
                     <li><a href="{{ url('/') }}">Terminos &amp; Condiciones</a></li>
-                    <li><a href="{{ url('/') }}">Contacto</a></li>
+                    <li><a href="{{ url('/contacto') }}">Contacto</a></li>
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
         </div><!-- /.container -->

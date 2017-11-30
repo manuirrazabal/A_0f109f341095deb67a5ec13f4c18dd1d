@@ -53,6 +53,10 @@ Route::get('business/activate/{id}', 'BusinessController@activate');
  *
  **/
 
+// GET GENERAL INFORMATION ON FRONTEND
+Route::get('contacto', 'IndexController@contact'); 
+
+
 //GET CATEGORIES 
 Route::get('c/{slug}', ['as' => 'categories.single', 'uses' => 'CategoriesController@index'])->where('slug', '[\w\d\-\_]+');
 
