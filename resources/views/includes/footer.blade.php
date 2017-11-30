@@ -1,5 +1,11 @@
 
 <footer class="footer">
+    @php 
+    /***
+     * Por el momento esta seccion estara desactivada hasta tener mayor
+     * informacion.
+     *
+
     <div class="footer-top">
         <div class="container">
             <div class="row">
@@ -35,16 +41,19 @@
         </div><!-- /.container -->
     </div><!-- /.footer-top -->
 
+    **/
+    @endphp
+
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-bottom-left">
-                &copy; 2018 Todos los derechos reservados. Creado por <a href="#">Manuirrazabal</a>.
+                &copy; 2018 Todos los derechos reservados. Creado por <a href="http://www.manuirrazabal.com" target="_blank">Manuirrazabal</a>.
             </div><!-- /.footer-bottom-left -->
 
             <div class="footer-bottom-right">
                 <ul class="nav nav-pills">
                     <li><a href="{{ url('/') }}">Inicio</a></li>
-                    <li><a href="{{ url('/') }}">Terminos &amp; Condiciones</a></li>
+                    {{-- <li><a href="{{ url('/') }}">Terminos &amp; Condiciones</a></li> --}}
                     <li><a href="{{ url('/contacto') }}">Contacto</a></li>
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
