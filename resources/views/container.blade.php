@@ -6,56 +6,26 @@
                 <div class="mt-80">
     <div class="hero-image">
     <div class="hero-image-inner" style="background-image: url('/img/tmp/slider-large-3.jpg');">
-        <div class="hero-image-content">
-            <div class="container">
-                <h1>Como una guia telef&oacute;nica</h1>
-                <p>Pero a nuestra manera. M&aacute;s f&aacute;cil y r&aacute;pida de usar.</p>   
-            </div><!-- /.container -->
-        </div><!-- /.hero-image-content -->
-
-        {{-- 
-        <div class="hero-image-form-wrapper">
+        
+        <div class="hero-video" style="position: unset;">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
-                        <form method="get" action="?">
-                            <h2>Start Searching</h2>
+                    <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+                        <h1>Como una guia telef&oacute;nica</h1>
+                        <p>Pero a nuestra manera. M&aacute;s f&aacute;cil y r&aacute;pida de usar.</p>  
 
-                            <div class="hero-image-keyword form-group">
-                                <input type="text" class="form-control" placeholder="Keyword">
-                            </div><!-- /.form-group -->
-
-                            <div class="hero-image-location form-group">
-                                <select class="form-control" title="Location">
-                                    <option>Bronx</option>
-                                    <option>Brooklyn</option>
-                                    <option>Manhattan</option>
-                                    <option>Staten Island</option>
-                                    <option>Queens</option>
-                                </select>
-                            </div><!-- /.form-group -->
-
-                            <div class="hero-image-category form-group">
-                                <select class="form-control" title="Category">
-                                    <option value="">Automotive</option>
-                                    <option value="">Jobs</option>
-                                    <option value="">Nightlife</option>
-                                    <option value="">Services</option>
-                                </select>
-                            </div><!-- /.form-group -->
-
-                            <div class="hero-image-price form-group">
-                                <input type="text" class="form-control" placeholder="Min. Price">
-                            </div><!-- /.form-group -->
-
-                            <button type="submit" class="btn btn-primary btn-block">Search</button>
+                        <form action="{{ url('search/') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Busca desde una costurera, un pintor o mucho mas..." name="q">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </span>
+                        </div><!-- /.input-group -->
                         </form>
                     </div><!-- /.col-* -->
                 </div><!-- /.row -->
             </div><!-- /.container -->
-        </div><!-- /.hero-image-form-wrapper -->
-
-        --}}
+        </div><!-- /.hero-image-content -->
 
     </div><!-- /.hero-image-inner -->
 </div><!-- /.hero-image -->
