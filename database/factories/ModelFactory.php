@@ -115,6 +115,7 @@ $factory->define(
         'business_phone'    => isset($business_phone) ?: $business_phone = $faker->phoneNumber,
         'business_mail'     => isset($business_mail) ?: $business_mail = $faker->companyEmail,
         'business_postalcode' => isset($business_postalcode) ?: $business_postalcode = $faker->postcode,
+        'business_webpage'  => isset($business_webpage) ?: $business_webpage = $faker->url,
         'business_cat_id'   => App\Models\Subcategory::inRandomOrder()->first()->scat_id,
         'business_slug'     => isset($business_slug) ?: $business_slug = $faker->slug,
         'bdetail_schedulle' => isset($bdetail_schedulle) ?: $bdetail_schedulle = $faker->sentence,

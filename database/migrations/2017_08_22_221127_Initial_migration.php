@@ -53,6 +53,7 @@ class InitialMigration extends Migration
                 $table->string('business_phone');
                 $table->string('business_mail')->nullable();
                 $table->string('business_postalcode')->nullable();
+                $table->string('business_webpage')->nullable();
                 $table->integer('business_cat_id');
                 $table->string('business_slug')->unique();
                 $table->text('bdetail_schedulle')->nullable();
