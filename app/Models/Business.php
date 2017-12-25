@@ -353,4 +353,48 @@ class Business extends Model
                 ->first();
     }
 
+    /**
+     * Get a list of business by name
+     *
+     * @param array filter
+     * @return object
+     */
+    public function getSearchByName($filter)
+    {
+       try {
+            $filter = (object) $filter;
+            $query = DB::table('an_business')
+                    ->join('an_subcategories', 'an_business.business_cat_id', '=', 'an_subcategories.scat_id')
+                    ->join('an_categories',    'an_categories.cat_id', '=', 'an_subcategories.scat_cat_id')
+                    ->join('an_cities',  'an_cities.id', '=', 'an_business.business_city')
+                    ->where('an_business.business_name', 'LIKE', '%'.$filter->q.'%');
+
+            if (isset($filter->category)){
+                $query->where('an_categories.cat_id', $filter->category);
+            }
+
+            if (isset($filter->location)) {
+                $query->where('an_cities.city_state_id', $filter->location);
+            }
+
+            $resp = $query->latest('an_business.created_at')->paginate($filter->pagination);
+            
+
+            // Adding Images
+            foreach ($resp as $key => $value) {
+                $image = BusinessImages::where('bimages_business_id', $value->business_id)->first();
+                if ($image) {
+                    $value->bimage_id       = $image->bimages_id;
+                    $value->bimages_route   = $image->bimages_route;
+                }
+            }
+
+        } catch (\Exception $e) {
+            $resp['ok'] = false;
+            $resp['error'] = $e->getMessage();
+        }
+
+        return  $resp;
+    }
+
 }

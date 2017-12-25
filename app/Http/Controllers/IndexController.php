@@ -44,6 +44,48 @@ class IndexController extends Controller
         return \View::make('container', $data);
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSearch(Request $request)
+    {
+        if ($request->exists('q')) {
+
+            if (Session::has('categories')) {
+                $data['categories'] = Session::get('categories');
+            }
+
+            if (Session::has('regiones')) {
+                $data['regiones'] = Session::get('regiones');
+            }
+
+            if (($request->exists('cat'))) {
+                $filter['category'] = ($request->input('cat'));
+            }
+
+            if (($request->exists('loc'))) {
+                $filter['location']  = ($request->input('loc'));
+            }
+
+            if (($request->exists('pagination'))) {
+                $filter['pagination'] = ($request->input('pagination'));
+            } else {
+                $filter['pagination'] = 1;
+            }
+
+            $filter['q'] = $request->input('q');
+
+
+            // Get Results from business
+            $data['search'] = (new Business)->getSearchByName($filter);
+            $data['q']      = $request->input('q');
+
+            return \View::make('frontend.search', $data);
+        }
+    }
+
     public function contact(Request $request)
     {
         if (Session::has('categories')) {

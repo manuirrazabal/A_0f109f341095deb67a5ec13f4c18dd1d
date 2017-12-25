@@ -69,6 +69,9 @@ Route::get('c/{slug}/{subcategory}', ['as' => 'subcategories.single', 'uses' => 
 Route::get('b/{slug}', ['as' => 'business.single', 'uses' => 'PostsController@index'])->where('slug', '[\w\d\-\_]+');
 Route::post('b/{slug}', ['as' => 'business.single', 'uses' => 'PostsController@index'])->where('slug', '[\w\d\-\_]+');
 
+//GET SEARCH
+Route::get('/search',['uses' => 'IndexController@getSearch','as' => 'search'])->where('q', '[\w\d\-\_]+');
+
 //Protected Routes 
 Route::get('ajax/state/{id}', 'AjaxController@states');
 Route::get('ajax/subcategory/{id}', 'AjaxController@subcategory');
