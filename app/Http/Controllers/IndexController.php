@@ -61,19 +61,27 @@ class IndexController extends Controller
                 $data['regiones'] = Session::get('regiones');
             }
 
-            if (($request->exists('cat'))) {
-                $filter['category'] = ($request->input('cat'));
+            if ($request->exists('cat')) {
+                $filter['category'] = $request->input('cat');
+                $data['cat']        = $request->input('cat');
             }
 
-            if (($request->exists('loc'))) {
-                $filter['location']  = ($request->input('loc'));
+            if ($request->exists('loc')) {
+                $filter['location']  = $request->input('loc');
+                 $data['loc']        = $request->input('loc');
             }
 
-            if (($request->exists('pagination'))) {
+            if ($request->exists('pagination')) {
                 $filter['pagination'] = ($request->input('pagination'));
+                $data['pagination']        = $request->input('pagination');
             } else {
-                $filter['pagination'] = 1;
+                $filter['pagination'] = 10;
             }
+
+            if ($request->exists('order')) {
+                $filter['order'] = ($request->input('order'));
+                $data['order']   = $request->input('order');
+            } 
 
             $filter['q'] = $request->input('q');
 

@@ -377,7 +377,13 @@ class Business extends Model
                 $query->where('an_cities.city_state_id', $filter->location);
             }
 
-            $resp = $query->latest('an_business.created_at')->paginate($filter->pagination);
+            if (isset($filter->order)) {
+                $query->orderBy('an_business.business_name', $filter->order);
+            } else {
+                $query->latest('an_business.created_at');
+            }
+
+            $resp = $query->paginate($filter->pagination);
             
 
             // Adding Images
