@@ -15,7 +15,7 @@ class BusinessSeeder extends Seeder
     public function run()
     {
         //Create Faker for business 
-        for ($i=0; $i < 50; $i++) { 
+        for ($i=0; $i < 500; $i++) { 
             $business = factory(Business::class, 1)->create(); 
             factory(BusinessImages::class, 2)->create(
                 [
