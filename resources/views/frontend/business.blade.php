@@ -7,7 +7,12 @@
         	@if(isset($business) && !empty($business))
 
         	<div class="mt-80 mb80">
-                <div class="detail-banner" style="background-image: url({{ $business->businessImages{0}->bimages_route }});">
+                <div class="detail-banner" 
+                	@if(substr($business->businessImages{0}->bimages_route, 0, 4) == "http")
+                		style="background-image: url({{ $business->businessImages{0}->bimages_route }})"
+                	@else
+                		style="background-image: url( {{ url('storage/'. $business->businessImages{0}->bimages_route) }})"
+                	@endif >
                     <div class="container">
                         <div class="detail-banner-left">
                             <div class="detail-banner-info">
@@ -44,12 +49,11 @@
 						                    <img src="{{ $business->businessImages{0}->bimages_route }}">
 						                </a>
 					            	@else
-					            		<a href="{{ url('storage/'.$image->bimages_route) }}">
-						                    <img src="{{ url('storage/'.$image->bimages_route) }}">
+					            		<a href="{{ url('storage/'. $business->businessImages{0}->bimages_route) }}">
+						                    <img src="{{ url('storage/'. $business->businessImages{0}->bimages_route) }}">
 						                </a>
 					            	@endif
 					            </div>
-					            
 					            <ul class="detail-gallery-index">
 					            	@foreach($business->businessImages as $image)
 						                <li class="detail-gallery-list-item active">
