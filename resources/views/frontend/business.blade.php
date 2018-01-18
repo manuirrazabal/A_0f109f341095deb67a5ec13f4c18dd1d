@@ -118,7 +118,7 @@
 			                    @endif
 			                    @if(!empty($business->business_webpage) && isset($business->business_webpage))
 			                    <div class="detail-contact-website">
-			                        <i class="fa fa-globe"></i> <a href="#">{{ $business->business_webpage }}</a>
+			                        <i class="fa fa-globe"></i> <a href="{{ $business->business_webpage }}" target="_blank">{{ $business->business_webpage }}</a>
 			                    </div>
 			                    @endif
 			                    @if(!empty($business->business_address) && isset($business->business_address))
