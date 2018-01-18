@@ -44,9 +44,9 @@ class LoginController extends Controller
                 'password'  => 'required',
             );
             $messages = array(
-                'email.required' => 'Please enter your email.',
-                'email.email' => 'Please enter valid email.',
-                'password.required' => 'Please enter your password.',
+                'email.required' => 'Por favor ingresa tu email',
+                'email.email' => 'Por favor ingresa un email valido',
+                'password.required' => 'Por favor ingresa tu contrase&ntilde;a',
             );
             $dataValidation = $request->all();
             $validator = Validator::make($dataValidation, $rules, $messages);
@@ -93,14 +93,14 @@ class LoginController extends Controller
             );
 
             $messages = array(
-                'first_name.required' => 'Please enter your first Name.',
-                'last_name.required' => 'Please enter your last name.',
-                'email.required' => 'Please enter your email.',
-                'email.email' => 'Please enter valid email.',
-                'password.required' => 'Please enter your password.',
-                'password2.required' => 'Please enter the confirmation of your password.',
-                'password.min' => 'Please enter a password with at least %s characters.',
-                'password2.same' => 'Passwords do not match, please check it.',
+                'first_name.required' => 'Por favor ingresa tu nombre.',
+                'last_name.required' => 'Por favor ingresa tu apellido.',
+                'email.required' => 'Por favor ingresa tu  email.',
+                'email.email' => 'Por favor ingresa un email valido.',
+                'password.required' => 'Por favor ingresa tu contrase&ntilde;a.',
+                'password2.required' => 'Por favor ingresa la confirmaci&oacute;n de tu contrase&ntilde;a',
+                'password.min' => 'Tu contrase&ntilde;a debe ser al menos %s caracteres.',
+                'password2.same' => 'Las contrase&ntilde;as no coinciden.',
             );
 
             $dataValidation = $request->all();
