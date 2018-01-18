@@ -85,8 +85,8 @@ class LoginController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = array(
-                'first_name' => 'required',
-                'last_name' => 'required',
+                'first_name' => 'required|max:128',
+                'last_name' => 'required|max:128',
                 'email'     => 'required|email|unique:an_users,user_email',
                 'password'  => 'required|min:6',
                 'password2' => 'required|same:password',

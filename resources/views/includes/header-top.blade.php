@@ -13,7 +13,7 @@
                     <div class="header-bottom">
                         @if(isset($userInfo))
                         <div class="header-action">
-                            <a href="listing-submit.html" class="header-action-inner" title="Add Listing" data-toggle="tooltip" data-placement="bottom">
+                            <a href="{{ url('/business/nuevo') }}" class="header-action-inner" title="Add Listing" data-toggle="tooltip" data-placement="bottom">
                                 <i class="fa fa-plus"></i>
                             </a><!-- /.header-action-inner -->
                         </div><!-- /.header-action -->

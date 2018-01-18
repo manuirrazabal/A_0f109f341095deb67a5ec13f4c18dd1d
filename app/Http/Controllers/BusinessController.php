@@ -62,7 +62,7 @@ class BusinessController extends Controller
         // POST
         if ($request->isMethod('post')) {
             $rules = array(
-                'businessName'      => 'required|string',
+                'businessName'      => 'required|string|max:255',
                 'businessAddress'   => 'required|string',
                 'businessState'     => 'required',
                 'businessCity'      => 'required',
