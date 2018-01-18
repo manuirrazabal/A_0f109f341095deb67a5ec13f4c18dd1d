@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MailServicesHelper;
 use App\Models\Users;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -124,7 +125,22 @@ class LoginController extends Controller
             $resp = $user->createUser($arr);
 
             if ($resp['ok']) {
-                return redirect()->to('/');
+                // SEND AN EMAIL. 
+                $content = array(
+                    'title'    => 'Felicidades tu nueva cuenta a sido creada exitosamente',
+                );
+                
+                $mailArray = array(
+                    'to'        => $request->input('email'),
+                    'subject'   => '[Anuncios Contacto] - Registro exitoso, Felicidades!',
+                    'content'   => $content,
+                    'template'  => 'emails.register'
+                );
+
+                if ((new MailServicesHelper)->sendMail($mailArray)) {
+                    return redirect()->to('/');
+                }
+                
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }
