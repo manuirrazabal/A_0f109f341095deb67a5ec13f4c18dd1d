@@ -23,7 +23,11 @@ class IndexController extends Controller
         Session::put('regiones', $reg);
     }
 
-
+    /**
+     * Display a index 
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
 
@@ -94,6 +98,11 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * Display a contact form
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function contact(Request $request)
     {
         if (Session::has('categories')) {

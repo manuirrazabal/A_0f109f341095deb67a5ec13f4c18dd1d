@@ -20,7 +20,10 @@ class CategoriesController extends Controller
 
     }
 
-    // Show all subcategories from that categorie
+    /**
+     *  Show all subcategories from that category father (slug)
+     *
+     **/
     public function index($slug)
     {
     	if(!isset($slug)) {
@@ -43,6 +46,10 @@ class CategoriesController extends Controller
     	return \View::make('frontend.categories', $data);
     }
 
+    /**
+     *  Show all Business from that category slug and subcategory
+     *
+     **/
     public function subcategories($slug, $subcategory)
     {
     	if(!isset($slug) && !isset($subcategory)) {

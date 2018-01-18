@@ -22,7 +22,7 @@ class AjaxController extends Controller
     }
 
     /**
-     *  Get cities from states
+     *  Get Subcategories from cetegories
      *
      **/
     public function subcategory($id)
