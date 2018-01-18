@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Users;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -10,6 +11,13 @@ use Session;
 class LoginController extends Controller
 {
     
+    public function __construct()
+    {
+        //For now i will bring the categories and subcategories here. 
+        $cat = (new Category)->getCategoriesAll();
+        Session::put('categories', $cat);
+    }
+
     /**
      * LOG-IN into application.
      *
@@ -23,6 +31,10 @@ class LoginController extends Controller
     {
         if (Session::has('userInfo')) {
             return  redirect()->to('/');
+        }
+
+        if (Session::has('categories')) {
+            $data['categories'] = Session::get('categories');
         }
 
         if ($request->isMethod('post')) {
@@ -53,7 +65,7 @@ class LoginController extends Controller
             }
         }
 
-        return \View::make('backend.login');
+        return \View::make('backend.login', $data);
     }
 
     /**
@@ -65,6 +77,10 @@ class LoginController extends Controller
     {
         if (Session::has('userInfo')) {
             return  redirect()->to('/');
+        }
+
+        if (Session::has('categories')) {
+            $data['categories'] = Session::get('categories');
         }
 
         if ($request->isMethod('post')) {
@@ -114,7 +130,7 @@ class LoginController extends Controller
             }
         }
 
-        return \View::make('backend.register');
+        return \View::make('backend.register', $data);
     }
 
     /**
