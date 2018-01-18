@@ -91,6 +91,7 @@ class BusinessController extends Controller
                 'business_mail' => $request->input('businessEmail'),
                 'business_postalcode' => $request->input('businessPostal'),
                 'business_cat_id' => $request->input('businessSubcategory'),
+                'business_webpage'  => $request->input('businessWeb'),
                 'business_slug' => returnFriendlyUrl($request->input('businessCity').json_decode($data['userInfo'])->user_id."-".$request->input('businessName')),
                 'bdetail_detail' => $request->input('businessDetail'),
                 'bdetail_schedulle' => $request->input('businessSchedulle'),

@@ -83,6 +83,11 @@
 				                       	<input type="text" class="form-control" id="businessPostal" name="businessPostal" placeholder="Codigo Postal" >
 				                    </div>
 
+				                    <div class="form-group">
+				                        <label for="exampleInputTextarea">Sitio Web</label>
+				                       	<input type="text" class="form-control" id="businessWeb" name="businessWeb" placeholder="Sitio Web" >
+				                    </div>
+
 				                     <div class="form-group">
 				                        <label for="exampleInputTextarea">Categoria</label>
 
