@@ -20,6 +20,13 @@ class PostsController extends Controller
 
     }
 
+    /**
+     * Show the business detail
+     *
+     *
+     * @param  request $request
+     * @param  string $slug
+     **/
     public function index($slug, Request $request)
     {
     	// Same shit.
