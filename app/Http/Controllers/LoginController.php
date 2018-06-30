@@ -46,7 +46,7 @@ class LoginController extends Controller
             );
             $messages = array(
                 'email.required' => 'Por favor ingresa tu email',
-                'email.email' => 'Por favor ingresa un email valido',
+                'email.email' => 'Por favor ingresa un email v&aacute;lido',
                 'password.required' => 'Por favor ingresa tu contrase&ntilde;a',
             );
             $dataValidation = $request->all();

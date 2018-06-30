@@ -16,7 +16,7 @@
 				        	{{ csrf_field() }}
 				            <div class="form-group">
 				                <label for="login-form-email">E-mail</label>
-				                <input type="email" class="form-control" name="email" id="login-form-email">
+				                <input type="email" class="form-control" name="email" id="login-form-email" value="{{ old('email') }}">
 				            </div><!-- /.form-group -->
 
 				            <div class="form-group">

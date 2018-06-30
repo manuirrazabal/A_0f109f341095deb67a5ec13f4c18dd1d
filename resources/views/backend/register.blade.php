@@ -16,12 +16,12 @@
 				        	{{ csrf_field() }}
 				        	<div class="form-group">
 				                <label for="login-form-first-name">Nombre</label>
-				                <input type="text" class="form-control" name="first_name" id="login-form-first-name">
+				                <input type="text" class="form-control" name="first_name" id="login-form-first-name" value="{{ old('first_name') }}">
 				            </div><!-- /.form-group -->
 
 				            <div class="form-group">
 				                <label for="login-form-last-name">Apellido</label>
-				                <input type="text" class="form-control" name="last_name" id="login-form-last-name">
+				                <input type="text" class="form-control" name="last_name" id="login-form-last-name" value="{{ old('last_name') }}">
 				            </div><!-- /.form-group -->
 
 				            <div class="form-group">
@@ -31,7 +31,7 @@
 
 				            <div class="form-group">
 				                <label for="login-form-phone">Tel&eacute;fono</label>
-				                <input type="text" class="form-control" name="phone" id="login-form-phone">
+				                <input type="text" class="form-control" name="phone" id="login-form-phone" value="{{ old('phone') }}">
 				            </div><!-- /.form-group -->
 
 				            <div class="form-group">

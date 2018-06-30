@@ -43,12 +43,12 @@
 				                	{{ csrf_field() }}
 				                    <div class="form-group">
 				                        <label for="exampleInputText1">Nombre</label>
-				                        <input type="text" class="form-control" id="businessName" name="businessName" placeholder="Nombre" >
+				                        <input type="text" class="form-control" id="businessName" name="businessName" placeholder="Nombre" value="{{ old('businessName') }}">
 				                    </div>
 
 				                    <div class="form-group">
 				                        <label for="exampleInputEmail1">Direcci&oacute;n</label>
-				                        <input type="text" class="form-control" id="businessAddress" name="businessAddress" placeholder="Direccion" >
+				                        <input type="text" class="form-control" id="businessAddress" name="businessAddress" placeholder="Direccion" value="{{ old('businessAddress') }}">
 				                    </div>
 
 				                    <div class="form-group">
@@ -70,22 +70,22 @@
 
 				                     <div class="form-group">
 				                        <label for="exampleInputTextarea">Telefono</label>
-				                        <input type="text" class="form-control" id="businessPhone" name="businessPhone" placeholder="Telefono" >
+				                        <input type="text" class="form-control" id="businessPhone" name="businessPhone" placeholder="Telefono" value="{{ old('businessPhone') }}">
 				                    </div>
 
 				                     <div class="form-group">
 				                        <label for="exampleInputTextarea">E-mail</label>
-				                        <input type="text" class="form-control" id="businessEmail" name="businessEmail" placeholder="Email" >
+				                        <input type="text" class="form-control" id="businessEmail" name="businessEmail" placeholder="Email" value="{{ old('businessEmail') }}">
 				                    </div>
 
 				                     <div class="form-group">
 				                        <label for="exampleInputTextarea">Codigo Postal</label>
-				                       	<input type="text" class="form-control" id="businessPostal" name="businessPostal" placeholder="Codigo Postal" >
+				                       	<input type="text" class="form-control" id="businessPostal" name="businessPostal" placeholder="Codigo Postal" value="{{ old('businessPostal') }}">
 				                    </div>
 
 				                    <div class="form-group">
 				                        <label for="exampleInputTextarea">Sitio Web</label>
-				                       	<input type="text" class="form-control" id="businessWeb" name="businessWeb" placeholder="Sitio Web" >
+				                       	<input type="text" class="form-control" id="businessWeb" name="businessWeb" placeholder="Sitio Web" value="{{ old('businessWeb') }}">
 				                    </div>
 
 				                     <div class="form-group">
@@ -106,17 +106,17 @@
 
 				                    <div class="form-group">
 				                        <label for="exampleInputTextarea">Detalle</label>
-				                        <textarea class="form-control" rows="5" id="businessDetail" name="businessDetail" placeholder="Detalle"></textarea>
+				                        <textarea class="form-control" rows="5" id="businessDetail" name="businessDetail" placeholder="Detalle" value="{{ old('businessDetail') }}"></textarea>
 				                    </div>
 
 				                    <div class="form-group">
 				                        <label for="exampleInputTextarea">Horarios</label>
-				                        <textarea class="form-control" rows="5" id="businessSchedulle" name="businessSchedulle" placeholder="Horario"></textarea>
+				                        <textarea class="form-control" rows="5" id="businessSchedulle" name="businessSchedulle" placeholder="Horario" value="{{ old('businessSchedulle') }}"></textarea>
 				                    </div>
 
 				                    <div class="form-group">
 				                        <label for="exampleInputTextarea">Mas Informacion</label>
-				                        <textarea class="form-control" rows="5" id="businessMoreInformation" name="businessMoreInformation" placeholder="Mas Informacion"></textarea>
+				                        <textarea class="form-control" rows="5" id="businessMoreInformation" name="businessMoreInformation" placeholder="Mas Informacion" value="{{ old('businessMoreInformation') }}"></textarea>
 				                    </div>
 
 				                    <button type="submit" class="btn btn-primary">Guardar</button>
