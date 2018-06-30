@@ -104,7 +104,7 @@ class BusinessController extends Controller
             $resp = $bus->addBusiness($arr);
 
             if ($resp['ok']) {
-                return redirect()->to('/business/imagenes/'.$resp['id'])->with('message', 'Tu anuncio ya fue creado, ahora puedes agregar tus imagenes.');
+                return redirect()->to('/adm/business/imagenes/'.$resp['id'])->with('message', 'Tu anuncio ya fue creado, ahora puedes agregar tus imagenes.');
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }
@@ -178,7 +178,7 @@ class BusinessController extends Controller
             $resp = $bus->updateBusiness($arr, $id);
 
             if ($resp['ok']) {
-                return redirect()->to('/business')->with('message', 'Datos Actualizados Exitosamente');
+                return redirect()->to('/adm/business')->with('message', 'Datos Actualizados Exitosamente');
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }
@@ -204,7 +204,7 @@ class BusinessController extends Controller
         $resp = $bus->deleteBusiness($id, json_decode($data['userInfo'])->user_id);
 
         if ($resp['ok']) {
-            return redirect()->to('/business')->with('message', 'Anuncio eliminado exitosamente');
+            return redirect()->to('/adm/business')->with('message', 'Anuncio eliminado exitosamente');
         } else {
             return back()->withErrors([$resp['error']]);
         }
@@ -250,7 +250,7 @@ class BusinessController extends Controller
                 $resp = (new BusinessImages)->addImage(['bimages_business_id' => $id, 'bimages_route' => $path]);
 
                 if ($resp['ok']) {
-                    return redirect()->to('/business/imagenes/'.$id)->with('message', 'Imagen agregada exitosamente');
+                    return redirect()->to('/adm/business/imagenes/'.$id)->with('message', 'Imagen agregada exitosamente');
                 } else {
                     return back()->withErrors([$resp['error']])->withInput();
                 }
@@ -294,7 +294,7 @@ class BusinessController extends Controller
             $delete = $image->forceDelete();
 
             if ($delete) {
-                 return redirect()->to('/business/imagenes/'.$businesId)->with('message', 'Imagen eliminada exitosamente');
+                 return redirect()->to('/adm/business/imagenes/'.$businesId)->with('message', 'Imagen eliminada exitosamente');
             } else {
                 return back()->withErrors(["Opps Algo sucedio, que no esperabamos"])->withInput();
             }
@@ -321,7 +321,7 @@ class BusinessController extends Controller
         $resp = (new Business)->activateBusiness($id, 0);
 
         if ($resp['ok']) {
-            return redirect()->to('/business')->with('message', 'Anuncio desactivado exitosamente');
+            return redirect()->to('/adm/business')->with('message', 'Anuncio desactivado exitosamente');
         } else {
             return back()->withErrors([$resp['error']])->withInput();
         }
@@ -346,7 +346,7 @@ class BusinessController extends Controller
         $resp = (new Business)->activateBusiness($id, 1);
 
         if ($resp['ok']) {
-            return redirect()->to('/business')->with('message', 'Anuncio activado exitosamente');
+            return redirect()->to('/adm/business')->with('message', 'Anuncio activado exitosamente');
         } else {
             return back()->withErrors([$resp['error']])->withInput();
         }

@@ -162,27 +162,27 @@ function deleteURL(urlSearch, key)
 function deleteBusiness(id) 
 {
     if (confirm('Estas seguro que deseas eliminar este anuncio?')) {
-        window.location.replace("/business/delete/"+id);
+        window.location.replace("/adm/business/delete/"+id);
     } 
 }
 
 function deleteImages(id) 
 {
     if (confirm('Estas seguro que deseas eliminar esta imagen?')) {
-        window.location.replace("/business/imagenes/"+id+"/delete");
+        window.location.replace("/adm/business/imagenes/"+id+"/delete");
     } 
 }
 
 function inactivateBusiness(id) 
 {
     if (confirm('Estas seguro que deseas desactivar este anuncio?')) {
-        window.location.replace("/business/inactivate/"+id);
+        window.location.replace("/adm/business/inactivate/"+id);
     } 
 }
 
 function activateBusiness(id) 
 {
     if (confirm('Estas seguro que deseas activar este anuncio?')) {
-        window.location.replace("/business/activate/"+id);
+        window.location.replace("/adm/business/activate/"+id);
     } 
 }

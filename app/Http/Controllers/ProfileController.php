@@ -59,7 +59,7 @@ class ProfileController extends Controller
             	Session::forget('userInfo');
             	Session::put('userInfo', json_encode($newUserData));
 
-                return redirect()->to('/profile')->with('message', 'Datos Actualizados Exitosamente');
+                return redirect()->to('/adm/profile')->with('message', 'Datos Actualizados Exitosamente');
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }
@@ -115,7 +115,7 @@ class ProfileController extends Controller
             $resp = $user->changePasswordUser(json_decode($data['userInfo'])->user_id, md5($request->new_password));
 
             if ($resp['ok']) {
-                return redirect()->to('/profile')->with('message', 'Datos Actualizados Exitosamente');
+                return redirect()->to('/adm/profile')->with('message', 'Datos Actualizados Exitosamente');
             } else {
                 return back()->withErrors([$resp['error']])->withInput();
             }       

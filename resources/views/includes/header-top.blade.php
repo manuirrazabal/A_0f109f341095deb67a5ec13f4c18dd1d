@@ -13,7 +13,7 @@
                     <div class="header-bottom">
                         @if(isset($userInfo))
                         <div class="header-action">
-                            <a href="{{ url('/business/nuevo') }}" class="header-action-inner" title="Add Listing" data-toggle="tooltip" data-placement="bottom">
+                            <a href="{{ url('/adm/business/nuevo') }}" class="header-action-inner" title="Add Listing" data-toggle="tooltip" data-placement="bottom">
                                 <i class="fa fa-plus"></i>
                             </a><!-- /.header-action-inner -->
                         </div><!-- /.header-action -->
@@ -57,7 +57,7 @@
                                 <a href="#">{{ $userInfo->user_name }} {{ $userInfo->user_lastname }} <i class="fa fa-chevron-down"></i></a>
                                 
                                 <ul class="sub-menu">
-                                    <li><a href="{{ url('/profile') }}">Mi Cuenta</a></li>
+                                    <li><a href="{{ url('/adm/profile') }}">Mi Cuenta</a></li>
                                     <li><a href="{{ url('/logout') }}">Cerrar Sesion</a></li>
                                 </ul>
                             </li>
