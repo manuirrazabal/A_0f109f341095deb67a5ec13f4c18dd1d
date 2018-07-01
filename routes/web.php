@@ -13,11 +13,8 @@
 
 Route::get('/', 'IndexController@index');
 
-Route::get('login', 'LoginController@login');
-Route::post('login', 'LoginController@login');
-
-Route::get('register', 'LoginController@register');
-Route::post('register', 'LoginController@register');
+Route::match(['get','post'], 'login', 'LoginController@login');
+Route::match(['get','post'], 'register', 'LoginController@register');
 
 //WITH LOGIN BACKEND
 Route::get('logout', 'LoginController@logout');
@@ -25,22 +22,17 @@ Route::get('logout', 'LoginController@logout');
 Route::prefix('adm')->group(function () {
 	Route::get('/', 'ProfileController@index');
 	
-	Route::get('profile', 'ProfileController@index');
-	Route::post('profile', 'ProfileController@index');
-	Route::get('password', 'ProfileController@password');
-	Route::post('password', 'ProfileController@password');
+	Route::match(['get','post'], 'profile', 'ProfileController@index');
+	Route::match(['get','post'], 'password', 'ProfileController@password');
 
 	//Business..
 	Route::get('business', 'BusinessController@index');
-	Route::get('business/nuevo', 'BusinessController@add');
-	Route::post('business/nuevo', 'BusinessController@add');
+	Route::match(['get','post'], 'business/nuevo', 'BusinessController@add');
 
 	Route::get('business/delete/{id}', 'BusinessController@delete');
-	Route::get('business/editar/{id}', 'BusinessController@edit');
-	Route::post('business/editar/{id}', 'BusinessController@edit');
+	Route::match(['get','post'], 'business/editar/{id}', 'BusinessController@edit');
 
-	Route::get('business/imagenes/{id}', 'BusinessController@images');
-	Route::post('business/imagenes/{id}', 'BusinessController@images');
+	Route::match(['get','post'], 'business/imagenes/{id}', 'BusinessController@images');
 	Route::get('business/imagenes/{id}/delete', 'BusinessController@deleteImages');
 
 	Route::get('business/inactivate/{id}', 'BusinessController@inactivate');
@@ -59,8 +51,7 @@ Route::prefix('adm')->group(function () {
  **/
 
 // GET GENERAL INFORMATION ON FRONTEND
-Route::get('contacto', 'IndexController@contact'); 
-Route::post('contacto', 'IndexController@contact'); 
+Route::match(['get','post'], 'contacto', 'IndexController@contact'); 
 
 
 

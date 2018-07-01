@@ -10,15 +10,6 @@ use Session;
 
 class CategoriesController extends Controller
 {
-    
-	public function __construct()
-    {
-    	//For now i will bring the categories and subcategories here. 
-    	$cat = (new Category)->getCategoriesAll();
-    	Session::put('categories', $cat);
-
-
-    }
 
     /**
      *  Show all subcategories from that category father (slug)
@@ -29,11 +20,6 @@ class CategoriesController extends Controller
     	if(!isset($slug)) {
     		 return abort(404);
     	}
-
-    	if (Session::has('categories')) {
-            $data['categories'] = Session::get('categories');
-            
-        }
 
         if (Session::has('userInfo')) {
             $data['userInfo'] = Session::get('userInfo');
@@ -55,10 +41,6 @@ class CategoriesController extends Controller
     	if(!isset($slug) && !isset($subcategory)) {
     		 return abort(404);
     	}
-
-    	if (Session::has('categories')) {
-            $data['categories'] = Session::get('categories');
-        }
 
         if (Session::has('userInfo')) {
             $data['userInfo'] = Session::get('userInfo');

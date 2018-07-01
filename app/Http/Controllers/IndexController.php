@@ -4,25 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Helpers\MailServicesHelper;
 use App\Models\Business;
-use App\Models\Category;
-use App\Models\States;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Session;
 
 class IndexController extends Controller
 {
-    public function __construct()
-    {
-    	//For now i will bring the categories and subcategories here. 
-    	$cat = (new Category)->getCategoriesAll();
-    	Session::put('categories', $cat);
-
-        //So far will be by hand until I allow other countries
-        $reg = (new States)->listStatesByCountry(43);
-        Session::put('regiones', $reg);
-    }
-
     /**
      * Display a index 
      *
@@ -30,14 +17,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-
-        if (Session::has('categories')) {
-            $data['categories'] = Session::get('categories');
-        }
-
-        if (Session::has('regiones')) {
-            $data['regiones'] = Session::get('regiones');
-        }
 
         if (Session::has('userInfo')) {
             $data['userInfo'] = Session::get('userInfo');
@@ -56,14 +35,6 @@ class IndexController extends Controller
     public function getSearch(Request $request)
     {
         if ($request->exists('q')) {
-
-            if (Session::has('categories')) {
-                $data['categories'] = Session::get('categories');
-            }
-
-            if (Session::has('regiones')) {
-                $data['regiones'] = Session::get('regiones');
-            }
 
             if ($request->exists('cat')) {
                 $filter['category'] = $request->input('cat');
@@ -105,10 +76,8 @@ class IndexController extends Controller
      */
     public function contact(Request $request)
     {
-        if (Session::has('categories')) {
-            $data['categories'] = Session::get('categories');
-        }
-
+        $data['title'] = 'Cont&aacute;ctenos';
+        
         if (Session::has('userInfo')) {
             $data['userInfo'] = Session::get('userInfo');
         }

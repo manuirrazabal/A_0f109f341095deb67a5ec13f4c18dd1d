@@ -4,20 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Helpers\MailServicesHelper;
 use App\Models\Users;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Session;
 
 class LoginController extends Controller
 {
     
-    public function __construct()
-    {
-        //For now i will bring the categories and subcategories here. 
-        $cat = (new Category)->getCategoriesAll();
-        Session::put('categories', $cat);
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    //use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
 
     /**
      * LOG-IN into application.
@@ -30,12 +44,10 @@ class LoginController extends Controller
      **/
     public function login(Request $request)
     {
+        $data['title'] = 'HandyList - Iniciar Session';
+
         if (Session::has('userInfo')) {
             return  redirect()->to('/');
-        }
-
-        if (Session::has('categories')) {
-            $data['categories'] = Session::get('categories');
         }
 
         if ($request->isMethod('post')) {
@@ -76,12 +88,10 @@ class LoginController extends Controller
      **/
     public function register(Request $request)
     {
+        $data['title'] = 'HandyList - Registrate';
+
         if (Session::has('userInfo')) {
             return  redirect()->to('/');
-        }
-
-        if (Session::has('categories')) {
-            $data['categories'] = Session::get('categories');
         }
 
         if ($request->isMethod('post')) {
@@ -138,7 +148,7 @@ class LoginController extends Controller
                 );
 
                 if ((new MailServicesHelper)->sendMail($mailArray)) {
-                    return redirect()->to('/');
+                    return redirect()->to('adm/profile')->with('message', 'Felicidades, Tu cuenta ha sido creada exitosamente');
                 }
                 
             } else {
