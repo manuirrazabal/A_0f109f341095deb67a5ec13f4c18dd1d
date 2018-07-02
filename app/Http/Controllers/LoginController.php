@@ -23,7 +23,7 @@ class LoginController extends Controller
     |
     */
 
-    //use AuthenticatesUsers;
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -31,6 +31,29 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    protected $model = 'App\Models\Users';
+
+    protected $rulesLogin = [ 'email'     => 'required|email',
+                              'password'  => 'required', ];
+
+    protected $messageLogin = [ 'email.required' => 'Por favor ingresa tu email',
+                                'email.email' => 'Por favor ingresa un email v&aacute;lido',
+                                'password.required' => 'Por favor ingresa tu contrase&ntilde;a', ];
+
+    protected $rulesRegister = ['first_name' => 'required|max:128',
+                                'last_name' => 'required|max:128',
+                                'email'     => 'required|email|unique:an_users,user_email',
+                                'password'  => 'required|min:6',
+                                'password2' => 'required|same:password',];
+
+    protected $messageRegister = [  'first_name.required' => 'Por favor ingresa tu nombre.',
+                                    'last_name.required' => 'Por favor ingresa tu apellido.',
+                                    'email.required' => 'Por favor ingresa tu  email.',
+                                    'email.email' => 'Por favor ingresa un email valido.',
+                                    'password.required' => 'Por favor ingresa tu contrase&ntilde;a.',
+                                    'password2.required' => 'Por favor ingresa la confirmaci&oacute;n de tu contrase&ntilde;a',
+                                    'password.min' => 'Tu contrase&ntilde;a debe ser al menos %s caracteres.',
+                                    'password2.same' => 'Las contrase&ntilde;as no coinciden.',];
 
 
     /**
@@ -46,36 +69,40 @@ class LoginController extends Controller
     {
         $data['title'] = 'HandyList - Iniciar Session';
 
-        if (Session::has('userInfo')) {
-            return  redirect()->to('/');
-        }
-
         if ($request->isMethod('post')) {
-            //Rules
-            $rules = array(
-                'email'     => 'required|email',
-                'password'  => 'required',
-            );
-            $messages = array(
-                'email.required' => 'Por favor ingresa tu email',
-                'email.email' => 'Por favor ingresa un email v&aacute;lido',
-                'password.required' => 'Por favor ingresa tu contrase&ntilde;a',
-            );
-            $dataValidation = $request->all();
-            $validator = Validator::make($dataValidation, $rules, $messages);
+            $validator = Validator::make($request->all(), $this->rulesLogin, $this->messageLogin);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
 
-            $user = new Users;
-            $resp = $user->loginUser($request->input('email'), md5($request->input('password')));
-           
-            if ($resp['ok']) {
-                return redirect()->to('/');
-            } else {
-                return back()->withErrors([$resp['error']])->withInput();
+            // If the class is using the ThrottlesLogins trait, we can automatically throttle
+            // the login attempts for this application. We'll key this by the username and
+            // the IP address of the client making these requests into this application.
+            if ($this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
+
+                return $this->sendLockoutResponse($request);
             }
+
+            if ($this->attemptLogin($request)) {
+                return $this->sendLoginResponse($request);
+            }
+
+            // If the login attempt was unsuccessful we will increment the number of attempts
+            // to login and redirect the user back to the login form. Of course, when this
+            // user surpasses their maximum number of attempts they will get locked out.
+            $this->incrementLoginAttempts($request);
+
+            return $this->sendFailedLoginResponse($request);
+            // $user = new Users;
+            // $resp = $user->loginUser($request->input('email'), md5($request->input('password')));
+           
+            // if ($resp['ok']) {
+            //     return redirect()->to('/');
+            // } else {
+            //     return back()->withErrors([$resp['error']])->withInput();
+            // }
         }
 
         return \View::make('backend.login', $data);
@@ -90,32 +117,12 @@ class LoginController extends Controller
     {
         $data['title'] = 'HandyList - Registrate';
 
-        if (Session::has('userInfo')) {
-            return  redirect()->to('/');
-        }
+        // if (Session::has('userInfo')) {
+        //     return  redirect()->to('/');
+        // }
 
         if ($request->isMethod('post')) {
-            $rules = array(
-                'first_name' => 'required|max:128',
-                'last_name' => 'required|max:128',
-                'email'     => 'required|email|unique:an_users,user_email',
-                'password'  => 'required|min:6',
-                'password2' => 'required|same:password',
-            );
-
-            $messages = array(
-                'first_name.required' => 'Por favor ingresa tu nombre.',
-                'last_name.required' => 'Por favor ingresa tu apellido.',
-                'email.required' => 'Por favor ingresa tu  email.',
-                'email.email' => 'Por favor ingresa un email valido.',
-                'password.required' => 'Por favor ingresa tu contrase&ntilde;a.',
-                'password2.required' => 'Por favor ingresa la confirmaci&oacute;n de tu contrase&ntilde;a',
-                'password.min' => 'Tu contrase&ntilde;a debe ser al menos %s caracteres.',
-                'password2.same' => 'Las contrase&ntilde;as no coinciden.',
-            );
-
-            $dataValidation = $request->all();
-            $validator = Validator::make($dataValidation, $rules, $messages);
+            $validator = Validator::make($request->all(), $this->rulesRegister, $this->messageRegister);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
@@ -124,8 +131,8 @@ class LoginController extends Controller
             $arr = array(
                 'user_name' => $request->input('first_name'),
                 'user_lastname' => $request->input('last_name'),
-                'user_email' => $request->input('email'),
-                'user_password' => md5($request->input('password')),
+                'email' => $request->input('email'),
+                'password' => md5($request->input('password')),
                 'user_phone' => $request->input('phone'),
                 'user_active' => 1,
                 'user_type_id' => 2
@@ -164,12 +171,17 @@ class LoginController extends Controller
      *
      * 
      **/
-    public function logout()
+    public function logout(Request $request)
     {
-        if (Session::has('userInfo')) {
-            Session::forget('userInfo');
-        }
+        $this->guard()->logout();
+
+        // if (Session::has('userInfo')) {
+        //     Session::forget('userInfo');
+        // }
+
+        $request->session()->invalidate();
 
         return redirect()->to('/');
     }
+
 }

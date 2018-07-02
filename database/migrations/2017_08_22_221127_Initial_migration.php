@@ -20,8 +20,8 @@ class InitialMigration extends Migration
                 $table->increments('user_id');
                 $table->string('user_name', 128);
                 $table->string('user_lastname', 128);
-                $table->string('user_email')->unique();
-                $table->string('user_password', 60);
+                $table->string('email')->unique();
+                $table->string('password', 60);
                 $table->string('user_phone')->nullable();
                 $table->boolean('user_active')->default(1);
                 $table->integer('user_type_id');

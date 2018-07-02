@@ -39,12 +39,6 @@
 							<div class="background-white p20 mb30">
 								@include('backend.includes.error-messages')
 
-
-								@if(isset($userInfo))
-									@php
-	                                    $userInfo = json_decode($userInfo);
-	                                @endphp
-
 								<form method="post" action="?">
 									{{ csrf_field() }}
 
@@ -56,27 +50,25 @@
 								    <div class="row">
 								        <div class="form-group col-sm-6">
 								            <label>Nombre</label>
-								            <input type="text" class="form-control" name="first_name" id="login-form-first-name" value="{{ $userInfo->user_name }}">
+								            <input type="text" class="form-control" name="first_name" id="login-form-first-name" value="{{ Auth::user()->user_name }}">
 								        </div><!-- /.form-group -->
 
 								        <div class="form-group col-sm-6">
 								            <label>Apellido</label>
-								            <input type="text" class="form-control" name="last_name" id="login-form-last-name" value="{{ $userInfo->user_lastname }}">
+								            <input type="text" class="form-control" name="last_name" id="login-form-last-name" value="{{ Auth::user()->user_lastname }}">
 								        </div><!-- /.form-group -->
 
 								        <div class="form-group col-sm-6">
 								            <label>E-mail</label>
-								            <input type="text" class="form-control" name="email" id="login-form-email" value="{{ $userInfo->user_email }}" disabled="disabled">
+								            <input type="text" class="form-control" name="email" id="login-form-email" value="{{ Auth::user()->email }}" disabled="disabled">
 								        </div><!-- /.form-group -->
 
 								        <div class="form-group col-sm-6">
 								            <label>Telefono</label>
-								            <input type="text" class="form-control" name="phone" id="login-form-phone" value="{{ $userInfo->user_phone }}">
+								            <input type="text" class="form-control" name="phone" id="login-form-phone" value="{{ Auth::user()->user_phone }}">
 								        </div><!-- /.form-group -->
 								    </div><!-- /.row -->
 								</form>
-
-								@endif
 							</div>
                         </div><!-- /.content -->
                     </div><!-- /.col-* -->

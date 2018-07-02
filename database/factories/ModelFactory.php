@@ -19,8 +19,8 @@ $factory->define(
     return [
         'user_name'     => isset($user_name) ?: $user_name = $faker->name,
         'user_lastname' => isset($user_lastname) ?: $user_lastname = $faker->lastName,
-        'user_email'    => isset($user_email) ?: $user_email = $faker->unique()->safeEmail,
-        'user_password' => isset($user_password) ?: $user_password =  bcrypt('secret'),
+        'email'    => isset($user_email) ?: $user_email = $faker->unique()->safeEmail,
+        'password' => isset($user_password) ?: $user_password =  bcrypt('secret'),
         'user_phone'    => isset($user_phone) ?: $user_phone = $faker->phoneNumber,
         'user_active'   => isset($user_active) ?: $user_active = 1,
         'user_type_id'  => isset($user_type_id) ?: $user_type_id = 1,

@@ -44,14 +44,14 @@ class UserSeeder extends Seeder
         //Loading and saving countries
         foreach ($this->initUsers as $users) {
         	//If Doesnt Exist Create It
-        	if (Users::where('user_email', $users[2])->count() == 0) {
+        	if (Users::where('email', $users[2])->count() == 0) {
         		//Create a new record. 
         		$newUsers = factory(Users::class, 1)->create(
                     [
                         'user_name'    	=> $users[0],
                         'user_lastname' => $users[1],
-                        'user_email'	=> $users[2],
-                        'user_password'	=> $users[3],
+                        'email'	=> $users[2],
+                        'password'	=> $users[3],
                         'user_phone'	=> $users[4],
                         'user_active'	=> $users[5],
                         'user_type_id'	=> $users[6],

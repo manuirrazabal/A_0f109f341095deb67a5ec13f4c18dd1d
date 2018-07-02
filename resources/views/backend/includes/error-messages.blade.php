@@ -9,7 +9,6 @@
 	    	@endforeach
 		@endif
 
-
 		@if(Session::has('message'))
 			<div class="alert alert-success" role="alert">
                 {{ Session::get('message') }}
@@ -17,6 +16,10 @@
         @elseif(Session::has('error'))
         	<div class="alert alert-danger" role="alert">
                 {{ Session::get('error') }}
+            </div>
+        @elseif(Session::has('status'))
+			<div class="alert alert-info" role="alert">
+                {{ Session::get('status') }}
             </div>
 		@endif
 	</div>

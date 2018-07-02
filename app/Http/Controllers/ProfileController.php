@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -21,12 +21,6 @@ class ProfileController extends Controller
         $data['title'] = 'HandyList - Mi Perfil';
 
         //Like always, check the user information, move into a middleware later
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
-
-        $data['userInfo'] = Session::get('userInfo');
-
         // POST
         if ($request->isMethod('post')) {
             $rules = array(
@@ -53,13 +47,13 @@ class ProfileController extends Controller
             );
 
             $user = new Users;
-            $resp = $user->updateUser($arr, json_decode($data['userInfo'])->user_id);
+            $resp = $user->updateUser($arr, Auth::user()->user_id);
 
             if ($resp['ok']) {
             	// For Now Update the session here and later update.
-            	$newUserData = $user->getUserId(json_decode($data['userInfo'])->user_id);
-            	Session::forget('userInfo');
-            	Session::put('userInfo', json_encode($newUserData));
+            	//$newUserData = $user->getUserId(json_decode($data['userInfo'])->user_id);
+            	//Session::forget('userInfo');
+            	//Session::put('userInfo', json_encode($newUserData));
 
                 return redirect()->to('/adm/profile')->with('message', 'Datos Actualizados Exitosamente');
             } else {
@@ -79,11 +73,11 @@ class ProfileController extends Controller
     {
         $data['title'] = 'HandyList - Cambiar mi contrase&ntilde;a';
 
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+        // if (!Session::has('userInfo')) {
+        //     return redirect()->to('/login');
+        // }
 
-        $data['userInfo'] = Session::get('userInfo');
+        //$data['userInfo'] = Session::get('userInfo');
 
         // POST
         if ($request->isMethod('post')) {
@@ -110,13 +104,13 @@ class ProfileController extends Controller
             }
 
             //Check if the passwords is the same like the user has.
-            if (!(new Users)->checkPassword(json_decode($data['userInfo'])->user_id, md5($request->old_password))) {
+            if (!(new Users)->checkPassword(Auth::user()->user_id, bcrypt($request->old_password))) {
                 return back()->withErrors(["La contraseña actual no coincide con la contraseña ingresada"])->withInput();
             }
 
             //Changing password.
             $user = new Users;
-            $resp = $user->changePasswordUser(json_decode($data['userInfo'])->user_id, md5($request->new_password));
+            $resp = $user->changePasswordUser(Auth::user()->user_id, bcrypt($request->new_password));
 
             if ($resp['ok']) {
                 return redirect()->to('/adm/profile')->with('message', 'Datos Actualizados Exitosamente');

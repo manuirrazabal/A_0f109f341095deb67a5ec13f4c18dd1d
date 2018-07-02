@@ -7,26 +7,20 @@
                 <div class="row">
     				<div class="col-sm-8 col-sm-offset-2">
 				        <div class="page-title">
-				            <h1>Iniciar Sesion</h1>
+				            <h1>Olvidaste tu contrase&ntilde;a?</h1>
 				        </div><!-- /.page-title -->
 
 				       	@include('backend.includes.error-messages')
 
-				        <form method="post" action="?">
+				        <form method="post" action="email">
 				        	{{ csrf_field() }}
 				            <div class="form-group">
 				                <label for="login-form-email">E-mail</label>
 				                <input type="email" class="form-control" name="email" id="login-form-email" value="{{ old('email') }}">
 				            </div><!-- /.form-group -->
 
-				            <div class="form-group">
-				                <label for="login-form-password">Contraseña</label>
-				                <input type="password" class="form-control" name="password" id="login-form-password">
-				            </div><!-- /.form-group -->
-
-				            <button type="submit" class="btn btn-primary pull-right">Iniciar</button>
+				            <button type="submit" class="btn btn-primary pull-right">Reestablecer Password</button>
 				        </form>
-				        <a href="{{  url('/password/email') }}">Olvidaste tu contrse&ntilde;a ?</a>
     				</div><!-- /.col-sm-4 -->
 				</div><!-- /.row -->
 

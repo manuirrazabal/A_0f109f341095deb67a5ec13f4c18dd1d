@@ -23,9 +23,9 @@ class BusinessController extends Controller
     public function index()
     {
     	//Like always, check the user information, move into a middleware later
-    	if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+    	// if (!Session::has('userInfo')) {
+     //        return redirect()->to('/login');
+     //    }
 
         $data['userInfo'] = Session::get('userInfo');
 
@@ -43,9 +43,9 @@ class BusinessController extends Controller
     public function add(Request $request)
     {
     	//Like always, check the user information, move into a middleware later
-    	if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+    	// if (!Session::has('userInfo')) {
+     //        return redirect()->to('/login');
+     //    }
         $data['userInfo']   = Session::get('userInfo');
 
         // Checking if the user doesnt have more than 3 records. 
@@ -120,9 +120,9 @@ class BusinessController extends Controller
     public function edit($id, Request $request)
     {
     	//Like always, check the user information, move into a middleware later
-    	if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+    	// if (!Session::has('userInfo')) {
+     //        return redirect()->to('/login');
+     //    }
 
         $data['userInfo'] = Session::get('userInfo');
 
@@ -194,9 +194,9 @@ class BusinessController extends Controller
     public function delete($id)
     {  
         //Like always, check the user information, move into a middleware later
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+        // if (!Session::has('userInfo')) {
+        //     return redirect()->to('/login');
+        // }
 
         $data['userInfo'] = Session::get('userInfo');
 
@@ -217,9 +217,9 @@ class BusinessController extends Controller
     public function images($id, Request $request)
     {
         //Like always, check the user information, move into a middleware later
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+        // if (!Session::has('userInfo')) {
+        //     return redirect()->to('/login');
+        // }
 
         $data['userInfo'] = Session::get('userInfo');
         $data['businessImages'] = (new BusinessImages)->getAll($id);
@@ -267,9 +267,9 @@ class BusinessController extends Controller
     public function deleteImages($id)
     {
         //Like always, check the user information, move into a middleware later
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+        // if (!Session::has('userInfo')) {
+        //     return redirect()->to('/login');
+        // }
 
         //If doenst exist the id and if null, sent to login page. 
         if (!isset($id) && empty($id)) {
@@ -309,9 +309,9 @@ class BusinessController extends Controller
     public function inactivate($id)
     {
          //Like always, check the user information, move into a middleware later
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+        // if (!Session::has('userInfo')) {
+        //     return redirect()->to('/login');
+        // }
 
         //If doenst exist the id and if null, sent to login page. 
         if (!isset($id) && empty($id)) {
@@ -334,9 +334,9 @@ class BusinessController extends Controller
     public function activate($id)
     {
          //Like always, check the user information, move into a middleware later
-        if (!Session::has('userInfo')) {
-            return redirect()->to('/login');
-        }
+        // if (!Session::has('userInfo')) {
+        //     return redirect()->to('/login');
+        // }
 
         //If doenst exist the id and if null, sent to login page. 
         if (!isset($id) && empty($id)) {

@@ -6,7 +6,7 @@ use App\Helpers\MailServicesHelper;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -17,10 +17,10 @@ class IndexController extends Controller
      */
     public function index()
     {
-
-        if (Session::has('userInfo')) {
-            $data['userInfo'] = Session::get('userInfo');
-        }
+        //dd(Auth::user());
+        // if (\Session::has('userInfo')) {
+        //     $data['userInfo'] = Session::get('userInfo');
+        // }
 
         $data['lastBusiness'] = (new Business)->lastCreatedBusiness();
         //dd($data['lastBusiness'] );
@@ -78,9 +78,9 @@ class IndexController extends Controller
     {
         $data['title'] = 'Cont&aacute;ctenos';
         
-        if (Session::has('userInfo')) {
-            $data['userInfo'] = Session::get('userInfo');
-        }
+        // if (Session::has('userInfo')) {
+        //     $data['userInfo'] = Session::get('userInfo');
+        // }
 
         // POST
         if ($request->isMethod('post')) {

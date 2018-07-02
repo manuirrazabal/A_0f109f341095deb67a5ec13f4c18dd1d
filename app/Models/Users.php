@@ -4,14 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Session;
 
-class Users extends Model
+class Users extends Authenticatable
 {
     /**
      * Included model traits
      */
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     /**
      * Table name
@@ -42,8 +45,8 @@ class Users extends Model
     protected $fillable = [
         'user_name',
         'user_lastname',
-        'user_email',
-        'user_password',
+        'email',
+        'password',
         'user_phone',
         'user_active',
         'user_type_id',
@@ -56,7 +59,7 @@ class Users extends Model
      * @var array
      */
     protected $hidden = [
-        'user_password', 'remember_token',
+        'password', 'remember_token',
     ];
 
     /*
@@ -158,12 +161,12 @@ class Users extends Model
     public function loginUser($user, $password)
     {
         try {
-            $user = $this->where('user_email', $user)->where('user_password', $password)->first();
+            $user = $this->where('email', $user)->where('password', $password)->first();
             if (!empty($user)) {
                 $resp['ok'] = true;
 
                 // Delete some data from array. 
-                unset($user['user_password']);
+                unset($user['password']);
                 unset($user['created_at']);
                 unset($user['updated_at']);
                 unset($user['deleted_at']);
@@ -197,7 +200,7 @@ class Users extends Model
     public function changePasswordUser($id, $password)
     {
         try {
-             $user = $this->where('user_id', $id)->update(['user_password' => $password]);
+             $user = $this->where('user_id', $id)->update(['password' => $password]);
             if (!empty($user)) {
                 $resp['ok'] = true;
                 
@@ -224,7 +227,7 @@ class Users extends Model
     public function checkPassword($id, $password)
     {
         try {
-             $user = $this->where('user_id', $id)->where('user_password', $password)->first();
+             $user = $this->where('user_id', $id)->where('password', $password)->first();
             if (!empty($user)) {
                 return true;
                 

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Category;
 use App\Models\States;
@@ -38,5 +39,20 @@ class Controller extends BaseController
         $reg = (new States)->listStatesByCountry(43);
         view()->share("regiones", $reg);
 
+
+        $this->middleware(function ($request, $next) {
+            // If the user is logged in, Proccess some variables.
+            if (Auth::check()) {
+
+            }
+
+
+            //dd(Auth::user());
+            //$this->user= Auth::user();
+
+            return $next($request);
+        });
     }
+
+
 }

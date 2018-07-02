@@ -21,9 +21,9 @@ class CategoriesController extends Controller
     		 return abort(404);
     	}
 
-        if (Session::has('userInfo')) {
-            $data['userInfo'] = Session::get('userInfo');
-        }
+        // if (Session::has('userInfo')) {
+        //     $data['userInfo'] = Session::get('userInfo');
+        // }
 
     	$data['subcategories'] = (new Category)->getCategoriesById($slug);
     	//Get the last items created in the category.
@@ -42,9 +42,9 @@ class CategoriesController extends Controller
     		 return abort(404);
     	}
 
-        if (Session::has('userInfo')) {
-            $data['userInfo'] = Session::get('userInfo');
-        }
+        // if (Session::has('userInfo')) {
+        //     $data['userInfo'] = Session::get('userInfo');
+        // }
 
         //Get Category and Subcategory Information. 
         $data['subcategory'] = (new Subcategory)->getSubcategoryInformationBySlug($subcategory);

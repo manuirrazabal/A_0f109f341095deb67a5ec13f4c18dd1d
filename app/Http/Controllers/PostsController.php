@@ -26,9 +26,9 @@ class PostsController extends Controller
     		 return abort(404);
     	}
 
-        if (Session::has('userInfo')) {
-            $data['userInfo'] = Session::get('userInfo');
-        }
+        // if (Session::has('userInfo')) {
+        //     $data['userInfo'] = Session::get('userInfo');
+        // }
 
         $data['business'] = (new Business)->getBusinessbySlug($slug);
         $data['categoryFather'] = (new Subcategory)->getCategorybySubcategory($data['business']->business_cat_id);
