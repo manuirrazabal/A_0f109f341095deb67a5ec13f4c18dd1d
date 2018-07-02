@@ -12,9 +12,14 @@
 */
 
 Route::get('/', 'IndexController@index');
+Route::get('/home', 'IndexController@index');
 
-Route::match(['get','post'], 'login', 'LoginController@login');
-Route::match(['get','post'], 'register', 'LoginController@register');
+Route::match(['get','post'], 'login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('register', 'Auth\RegisterController@register');
+
+//Route::match(['get','post'], 'register', 'LoginController@register');
 
 // Password reset link request routes..
 Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm');
@@ -23,11 +28,6 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token?}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //Route::match(['get','post'], 'reset_password', 'Auth\ResetPasswordController@showResetForm');
-
-
-
-//WITH LOGIN BACKEND
-Route::get('logout', 'LoginController@logout');
 
 
 Route::prefix('adm')->group(function () {
