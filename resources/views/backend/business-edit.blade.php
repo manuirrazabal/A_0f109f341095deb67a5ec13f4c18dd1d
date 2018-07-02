@@ -43,7 +43,7 @@
 					                <form method="post" action="?">
 					                	<h3 class="page-title">
 									        Detalle de Anuncio
-									        <a href="{{ url('/business') }}" class="btn btn-primary pull-right" role="button">Atras</a>
+									        <a href="{{ url('/adm/business') }}" class="btn btn-primary pull-right" role="button">Atras</a>
 									    </h3>
 
 					                	{{ csrf_field() }}

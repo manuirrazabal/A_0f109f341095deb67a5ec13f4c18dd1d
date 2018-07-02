@@ -20,7 +20,7 @@
                         <div class="widget">
 						    <ul class="menu-advanced">
 						    	<li class="active"><a href="{{  url('/adm/business') }}"><i class="fa fa-pencil"></i>Mis Anuncios</a></li>
-						    	<li><a href="{{ url('/badm/usiness/nuevo') }}"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
+						    	<li><a href="{{ url('/adm/usiness/nuevo') }}"><i class="fa fa-pencil"></i>Nuevo Anuncio</a></li>
 						        <li><a href="{{  url('/adm/profile') }}"><i class="fa fa-user"></i>Mi Perfil</a></li>
 						        <li><a href="{{  url('/adm/password') }}"><i class="fa fa-key"></i> Cambiar Contraseña</a></li>
 						        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out"></i> Cerrar Sesion</a></li>
@@ -43,7 +43,7 @@
 									<div class="col-sm-12">
 										<h3 class="page-title">
 									        Detalle de Anuncio
-									        <a href="{{ url('/business') }}" class="btn btn-primary pull-right" role="button">Atras</a>
+									        <a href="{{ url('/adm/business') }}" class="btn btn-primary pull-right" role="button">Atras</a>
 									    </h3>
 									</div>
 								</div>

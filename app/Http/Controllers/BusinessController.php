@@ -11,8 +11,8 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-use Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessController extends Controller
 {
@@ -27,12 +27,12 @@ class BusinessController extends Controller
      //        return redirect()->to('/login');
      //    }
 
-        $data['userInfo'] = Session::get('userInfo');
+        //$data['userInfo'] = Session::get('userInfo');
 
         //List business from user. 
         $bus = new Business;
-        $data['businessActive'] = $bus->getBusiness(json_decode($data['userInfo'])->user_id);
-        $data['businessInactive'] = $bus->getBusinessInactives(json_decode($data['userInfo'])->user_id);
+        $data['businessActive'] = $bus->getBusiness(Auth::user()->user_id);
+        $data['businessInactive'] = $bus->getBusinessInactives(Auth::user()->user_id);
         return \View::make('backend.business', $data);
     }
 
@@ -46,10 +46,10 @@ class BusinessController extends Controller
     	// if (!Session::has('userInfo')) {
      //        return redirect()->to('/login');
      //    }
-        $data['userInfo']   = Session::get('userInfo');
+        //$data['userInfo']   = Session::get('userInfo');
 
         // Checking if the user doesnt have more than 3 records. 
-        if ((new Business)->countBusiness(json_decode($data['userInfo'])->user_id) > 3) {
+        if ((new Business)->countBusiness(Auth::user()->user_id) > 3) {
             return redirect()->to('/business')->with('error', 'Lo sentimos. No puedes crear mas de tres anuncios.');
         }
 
@@ -92,12 +92,12 @@ class BusinessController extends Controller
                 'business_postalcode' => $request->input('businessPostal'),
                 'business_cat_id' => $request->input('businessSubcategory'),
                 'business_webpage'  => $request->input('businessWeb'),
-                'business_slug' => returnFriendlyUrl($request->input('businessCity').json_decode($data['userInfo'])->user_id."-".$request->input('businessName')),
+                'business_slug' => returnFriendlyUrl($request->input('businessCity').Auth::user()->user_id."-".$request->input('businessName')),
                 'bdetail_detail' => $request->input('businessDetail'),
                 'bdetail_schedulle' => $request->input('businessSchedulle'),
                 'bdetail_more_info' => $request->input('businessMoreInformation'),
                 'business_active'   => 1,
-                'business_user_id'  => json_decode($data['userInfo'])->user_id,
+                'business_user_id'  => Auth::user()->user_id,
 
             );
 
@@ -124,11 +124,11 @@ class BusinessController extends Controller
      //        return redirect()->to('/login');
      //    }
 
-        $data['userInfo'] = Session::get('userInfo');
+        //$data['userInfo'] = Session::get('userInfo');
 
         //List business from user. 
         $bus = new Business;
-        $data['businessDetail'] = $bus->getBusinessById($id ,json_decode($data['userInfo'])->user_id);
+        $data['businessDetail'] = $bus->getBusinessById($id ,Auth::user()->user_id);
         $data['regiones'] 		= (new States)->listStatesByCountry(43);
         $data['regionFather'] 	= (new Cities)->listStateFather($data['businessDetail']->business_city);
         $data['cities'] 		= (new Cities)->listCitiesByState($data['regionFather']);
@@ -169,7 +169,7 @@ class BusinessController extends Controller
                 'business_mail' => $request->input('businessEmail'),
                 'business_postalcode' => $request->input('businessPostal'),
                 'business_cat_id' => $request->input('businessSubcategory'),
-                'business_slug' => returnFriendlyUrl($request->input('businessCity').json_decode($data['userInfo'])->user_id."-".$request->input('businessName')),
+                'business_slug' => returnFriendlyUrl($request->input('businessCity').Auth::user()->user_id."-".$request->input('businessName')),
                 'bdetail_detail' => $request->input('businessDetail'),
                 'bdetail_schedulle' => $request->input('businessSchedulle'),
                 'bdetail_more_info' => $request->input('businessMoreInformation'),
@@ -198,10 +198,8 @@ class BusinessController extends Controller
         //     return redirect()->to('/login');
         // }
 
-        $data['userInfo'] = Session::get('userInfo');
-
         $bus = new Business;
-        $resp = $bus->deleteBusiness($id, json_decode($data['userInfo'])->user_id);
+        $resp = $bus->deleteBusiness($id, Auth::user()->user_id);
 
         if ($resp['ok']) {
             return redirect()->to('/adm/business')->with('message', 'Anuncio eliminado exitosamente');
@@ -221,7 +219,6 @@ class BusinessController extends Controller
         //     return redirect()->to('/login');
         // }
 
-        $data['userInfo'] = Session::get('userInfo');
         $data['businessImages'] = (new BusinessImages)->getAll($id);
         $data['id'] = $id;
 
@@ -243,7 +240,7 @@ class BusinessController extends Controller
             }
 
             //UPLOAD IMAGE.  
-            $fileName = "image-".json_decode($data['userInfo'])->user_id."-".$id."-".Carbon::now()->timestamp.".".$request->file('bimageUpload')->getClientOriginalExtension();
+            $fileName = "image-".Auth::user()->user_id."-".$id."-".Carbon::now()->timestamp.".".$request->file('bimageUpload')->getClientOriginalExtension();
      
             $path = Storage::putFileAs('uploads', $request->file('bimageUpload'), $fileName, 'public');
             if ($path) {
