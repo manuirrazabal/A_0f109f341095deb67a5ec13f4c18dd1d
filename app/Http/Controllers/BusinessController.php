@@ -16,19 +16,38 @@ use Illuminate\Support\Facades\Auth;
 
 class BusinessController extends Controller
 {
+    
+    /**
+     * Rules and Messages for validator
+     *
+     * @var array
+     */
+    protected $addrules = ['businessName'      => 'required|string|max:255',
+                'businessAddress'   => 'required|string',
+                'businessState'     => 'required',
+                'businessCity'      => 'required',
+                'businessEmail'     => 'required',
+                'businessCategory'  => 'required',
+                'businessSubcategory' => 'required'];
+    protected $messages = ['businessName.required' => 'Por favor ingresar el nombre',
+                'businessAddress.required' => 'Por favor ingresar la direccion',];
+
+    protected $editRules = ['businessName'      => 'required|string',
+                            'businessAddress'   => 'required|string',
+                            'businessState'     => 'required',
+                            'businessCity'      => 'required',
+                            'businessEmail'     => 'required',
+                            'businessCategory'  => 'required',
+                            'businessSubcategory' => 'required',];
+    protected $editMessages = [];
+
+
     /**
      *	Index, Show the list of business created by user.
      *
      **/
     public function index()
     {
-    	//Like always, check the user information, move into a middleware later
-    	// if (!Session::has('userInfo')) {
-     //        return redirect()->to('/login');
-     //    }
-
-        //$data['userInfo'] = Session::get('userInfo');
-
         //List business from user. 
         $bus = new Business;
         $data['businessActive'] = $bus->getBusiness(Auth::user()->user_id);
@@ -42,11 +61,6 @@ class BusinessController extends Controller
      **/
     public function add(Request $request)
     {
-    	//Like always, check the user information, move into a middleware later
-    	// if (!Session::has('userInfo')) {
-     //        return redirect()->to('/login');
-     //    }
-        //$data['userInfo']   = Session::get('userInfo');
 
         // Checking if the user doesnt have more than 3 records. 
         if ((new Business)->countBusiness(Auth::user()->user_id) > 3) {
@@ -61,23 +75,7 @@ class BusinessController extends Controller
 
         // POST
         if ($request->isMethod('post')) {
-            $rules = array(
-                'businessName'      => 'required|string|max:255',
-                'businessAddress'   => 'required|string',
-                'businessState'     => 'required',
-                'businessCity'      => 'required',
-                'businessEmail'     => 'required',
-                'businessCategory'  => 'required',
-                'businessSubcategory' => 'required'
-            );
-
-            $messages = array(
-                'businessName.required' => 'Por favor ingresar el nombre',
-                'businessAddress.required' => 'Por favor ingresar la direccion',
-            );
-
-            $dataValidation = $request->all();
-            $validator = Validator::make($dataValidation, $rules, $messages);
+            $validator = Validator::make($request->all(), $this->addrules, $this->messages);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
@@ -119,13 +117,6 @@ class BusinessController extends Controller
      **/
     public function edit($id, Request $request)
     {
-    	//Like always, check the user information, move into a middleware later
-    	// if (!Session::has('userInfo')) {
-     //        return redirect()->to('/login');
-     //    }
-
-        //$data['userInfo'] = Session::get('userInfo');
-
         //List business from user. 
         $bus = new Business;
         $data['businessDetail'] = $bus->getBusinessById($id ,Auth::user()->user_id);
@@ -139,23 +130,7 @@ class BusinessController extends Controller
 
         // POST
         if ($request->isMethod('post')) {
-            $rules = array(
-                'businessName'      => 'required|string',
-                'businessAddress'   => 'required|string',
-                'businessState'     => 'required',
-                'businessCity'      => 'required',
-                'businessEmail'     => 'required',
-                'businessCategory'  => 'required',
-                'businessSubcategory' => 'required',
-            );
-
-            $messages = array(
-                'businessName.required' => 'Por favor ingresar el nombre',
-                'businessAddress.required' => 'Por favor ingresar la direccion',
-            );
-
-            $dataValidation = $request->all();
-            $validator = Validator::make($dataValidation, $rules, $messages);
+            $validator = Validator::make($request->all(), $this->editRules, $this->messages);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();

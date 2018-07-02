@@ -11,19 +11,30 @@ use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
     /**
+     * Generals variables for all controllers.
+     *
+     * @var string
+     */
+    protected $contactRules = [ 'contactName' => 'required|string',
+                                'contactSubject' => 'required',
+                                'contactEmail'  => 'required|email',
+                                'contactMessage' => 'required',];
+    protected $contactMessages = ['contactName.required' => 'Por favor ingrese su nombre',
+                'contactName.string' => 'El nombre debe contener caracteres',
+                'contactEmail.required' => 'Por favor ingrese su email',
+                'contactEmail.email' => 'El email ingresado no es valido',
+                'contactMessage.required' => 'Por favor ingrese su mensaje',
+                'contactSubject.required' => 'Por favor ingrese el asunto del mensaje.',];
+
+
+    /**
      * Display a index 
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //dd(Auth::user());
-        // if (\Session::has('userInfo')) {
-        //     $data['userInfo'] = Session::get('userInfo');
-        // }
-
         $data['lastBusiness'] = (new Business)->lastCreatedBusiness();
-        //dd($data['lastBusiness'] );
         return \View::make('container', $data);
     }
 
@@ -77,31 +88,10 @@ class IndexController extends Controller
     public function contact(Request $request)
     {
         $data['title'] = 'Cont&aacute;ctenos';
-        
-        // if (Session::has('userInfo')) {
-        //     $data['userInfo'] = Session::get('userInfo');
-        // }
 
         // POST
         if ($request->isMethod('post')) {
-            $rules = array(
-                'contactName' => 'required|string',
-                'contactSubject' => 'required',
-                'contactEmail'  => 'required|email',
-                'contactMessage' => 'required',
-            );
-
-            $messages = array(
-                'contactName.required' => 'Por favor ingrese su nombre',
-                'contactName.string' => 'El nombre debe contener caracteres',
-                'contactEmail.required' => 'Por favor ingrese su email',
-                'contactEmail.email' => 'El email ingresado no es valido',
-                'contactMessage.required' => 'Por favor ingrese su mensaje',
-                'contactSubject.required' => 'Por favor ingrese el asunto del mensaje.',
-            );
-
-            $dataValidation = $request->all();
-            $validator = Validator::make($dataValidation, $rules, $messages);
+            $validator = Validator::make($request->all(), $this->contactRules, $this->contactMessages);
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
